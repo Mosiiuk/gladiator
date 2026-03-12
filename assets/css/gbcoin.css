@@ -1,0 +1,19 @@
+.gbcoint_container
+{
+
+}
+
+.gbcoin_hidden
+{
+    display: none;
+}
+
+.gbcoin_error
+{
+    color: red;
+}
+
+.gbcoin_ok
+{
+    color: green;
+}

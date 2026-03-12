@@ -1,0 +1,469 @@
+/**
+ * Theme Name: Gladiator
+ * Author: Webcapitan
+ * Author URI: https://webcapitan.com/en/
+ * Version: 1.0
+ * Text Domain: gladiator-theme
+ */
+
+select.product_select {
+    display: none;
+}
+
+.submit__group button {
+    width: unset;
+}
+
+.blockUI.blockOverlay {
+    background: transparent top center no-repeat !important;
+    background-image: url(./assets/img/loader-img.gif) !important;
+    background-size: 100px 100px !important;
+}
+
+.woocommerce .blockUI.blockOverlay::before {
+    display: none;
+}
+
+.wc-no-matching-variations {
+    font-size: 20px;
+    border: none;
+    background: transparent;
+    padding: 10px 0 0 0;
+    margin: 0;
+}
+
+.wc-no-matching-variations::before {
+    display: none;
+}
+
+.woocommerce-notices-wrapper {
+    position: fixed;
+    top: 120px;
+    right: -100%;
+    z-index: 111;
+    animation: hide-notacion 5s;
+    max-width: 100%;
+}
+
+.woocommerce-notices-wrapper.res_animation {
+    animation: none;
+}
+
+@keyframes hide-notacion {
+    0% {
+        right: -100%;
+    }
+    20% {
+        right: 10px;
+    }
+    80% {
+        right: 10px;
+    }
+    100% {
+        right: -100%;
+    }
+}
+
+.woocommerce-notices-wrapper .woocommerce-message,
+.woocommerce-info, .woocommerce-error {
+    border-top: 3px solid #090616;
+    background-color: #212541d4;
+    backdrop-filter: blur(4px);
+    border-radius: 8px;
+    margin: 0;
+    color: #a5a5a5;
+}
+
+.woocommerce-message::before {
+    color: #098cec;
+    content: '';
+    background-image: url(./assets/img/WC_ok.svg);
+    height: 18px;
+    width: 18px;
+    background-size: 100%;
+    display: inline-block;
+    position: absolute;
+    top: 1em;
+    left: 1.5em;
+}
+
+.woocommerce-message::after {
+    content: '';
+}
+
+.woocommerce-message .button {
+    margin-left: 15px;
+}
+
+@media screen and (max-width: 991px) {
+    .woocommerce-notices-wrapper {
+        top: 85px;
+    }
+}
+
+.woocommerce table.shop_table {
+    border: none
+}
+
+.woocommerce button[name="update_cart"],
+.woocommerce input[name="update_cart"] {
+    display: none;
+}
+
+.woocommerce table.shop_table td {
+    padding: 29px 47px;
+}
+
+@media screen and (max-width: 991px) {
+    .woocommerce table.shop_table td {
+        padding: 20px 15px;
+    }
+}
+
+.table__cart tr td .close__product {
+    font-family: 'Niveau Grotesk', sans-serif;
+}
+
+.table__cart tr td {
+    background-color: #050215 !important;
+}
+
+.woocommerce table.shop_table_responsive tr td::before,
+.woocommerce-page table.shop_table_responsive tr td::before {
+    display: none;
+}
+
+.woocommerce table.shop_table td:last-child {
+    padding: 10px 17px;
+}
+
+.woocommerce-error,
+.woocommerce-info,
+.woocommerce-message {
+    padding: 1em 2em 1em 3.5em;
+    margin: 0 0 2em;
+    position: relative;
+    list-style: none outside;
+    width: auto;
+    word-wrap: break-word;
+}
+
+.section__cart .woocommerce-remove-coupon {
+    font-size: 16px;
+}
+
+.section__cart .cart-discount,
+.section__cart .totals_subtotal {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.btn a.checkout-button {
+    background-color: #36b3ff;
+    -webkit-box-shadow: 0 0 41px 1px rgb(54 179 255 / 40%);
+    box-shadow: 0 0 41px 1px rgb(54 179 255 / 40%);
+    border: none;
+    border-bottom: 3px solid #36b3ff;
+}
+
+.paypal-button {
+    border: 3px solid #098cec;
+    background-color: transparent;
+    padding: 13px 13px 11px;
+    font-size: 18px;
+}
+
+/* button[name="apply_coupon"] {
+    display: none;
+} */
+
+.wcppec-checkout-buttons__separator {
+    display: none;
+}
+
+.woocommerce-variation-add-to-cart .wc-no-matching-variations {
+    padding: 1em;
+    margin: 0;
+}
+
+.additional_price {
+    margin: 30px 0px -30px;
+}
+
+.input__group.form__apply .btn .checkout_discount_button {
+    transition: 0.3;
+}
+
+.input__group.form__apply .btn .checkout_discount_button.active {
+    background-color: #098cec;
+    border: none;
+    border-bottom: 3px solid #36b3ff;
+    -webkit-box-shadow: 0 0 41px 1px rgb(54 179 255 / 20%);
+}
+
+.nice-select .list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+    width: 11px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #36b3ff;
+}
+
+/* .section__bottom__text {
+    z-index: -1;
+} */
+
+body {
+    scrollbar-color: rebeccapurple green;
+    scrollbar-width: thin;
+}
+
+/* .cart-empty.woocommerce-info {
+    margin-top: 120px;
+} */
+.notification-container{
+    margin-top: 120px;
+}
+
+.section__payinfo .submit__group {
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.woocommerce-checkout-payment {
+    width: 100%;
+}
+
+.woocommerce-NoticeGroup.woocommerce-NoticeGroup-checkout {
+    width: 100%;
+}
+
+.deals__filter__items {
+    width: 100%;
+    max-height: 456px;
+}
+
+.deals__filter__items .slick-list {
+    width: 100%;
+}
+
+.woocommerce-order.container.section__intro__mini {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (min-width: 991px) {
+    .woocommerce-thankyou-order-received {
+        font-size: 35px;
+        max-width: 500px;
+    }
+}
+
+.wc-stripe-elements-field {
+    width: 100%;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background-color: #1e1c2d;
+    border: none;
+    outline: 0;
+    font-family: 'Niveau Grotesk',sans-serif;
+    font-size: 16px;
+    padding: 11px 20px 12px;
+    color: #fff;
+    margin-bottom: 22px;
+}
+
+.InputContainer .InputElement{
+    color: #fff !important;
+}
+
+.wpcf7 form.submitting .ajax-loader{
+    visibility: visible;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    bottom: 15px;
+}
+
+.order-details__payment-details h3{
+    margin-bottom: 20px;
+    margin-top: 10px;
+    text-align: center;
+}
+.order-details__payment-details{
+    margin-bottom: 30px;
+    min-width: 300px;
+}
+
+.footer__nav{
+    flex-wrap: wrap;
+
+}
+.footer__nav li a{
+    white-space: nowrap;
+}
+.footer__social{
+    width: auto;
+}
+.footer__nav{
+    width: auto;
+}
+
+@media screen and (max-width: 492px){
+    .footer__social{
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* .dropdown .list::after{
+    content: "";
+    position: absolute;
+    height: 37px;
+    width: 100%;
+    top: -37px;
+} */
+
+.section__products .b-super__button .front__stage .btn__object img{
+    left: 0;
+}
+.select{
+    margin-left: 0;
+}
+
+@media screen and (max-width: 991px){
+    .header__nav ul{
+        margin-bottom: 0;
+    }
+    .header__nav .btn__cart{
+        margin-top: 25px;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.howtoorder__list{
+    justify-content: center;
+}
+
+.discount .btn button{
+    cursor: pointer;
+    color: #fff;
+    background-color: #098cec;
+    border-bottom: 3px solid #36b3ff;
+    -webkit-box-shadow: 0 0 41px 1px rgb(54 179 255 / 20%);
+    box-shadow: 0 0 41px 1px rgb(54 179 255 / 20%);
+
+    padding: 8px 13px 6px!important;
+    border: none!important;
+    border: none!important;
+    font-size: 18px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    font-family: Colus, sans-serif;
+    width: 100%;
+}
+
+#product-addons-total{
+    display: none;
+}
+
+select.js-currency_select{
+    display: none;
+}
+
+.main{
+    min-height: 76vh
+}
+
+/* .b-copyright{
+    width: 29%;
+} */
+
+.section__intro p a{
+    transition: 0.3s;
+    font-family: 'Niveau Grotesk', sans-serif;
+}
+
+
+.section__intro p a:hover{
+    color: #1da2f1;
+}
+
+.offer__item .offer__price{
+    margin: 0 -10px;
+    padding: 0 10px;
+    background: #1da2f1 !important;
+    display: flex;
+    width: fit-content;
+    font-size: 17px;
+    font-weight: 500;
+    color: #fff;
+    margin-left: 0;
+}
+.offer__item .offer__price .woocommerce-Price-amount{
+    margin-left: 5px
+}
+
+.footer__nav {
+    min-width: 50%;
+}
+
+.section__intro h1,
+.section__intro p{
+    text-shadow: -1px 4px 10px rgb(0 0 0);
+}
+@media (max-width: 1440px){
+	.choose_game_main_wrap a{
+		font-size: 17px;
+	}
+	.hero_slider_wrap.slick-dotted.slick-slider .slick-dots{
+		display: none;
+	}
+}
+
+@media (max-width: 992px){
+	.choose_game_section{
+		margin-top: 0;
+		padding-top: 45px;
+	}
+}
+@media (max-width: 768px){
+.hero_slider_wrap .slick-next, .hero_slider_wrap .slick-prev {
+    z-index: 55;
+    background: rgba(255, 255, 255, 0.1);
+    width: 24px;
+    height: 122px;
+}
+	.howtobuy__wrapper li {
+    width: 100%;
+    padding: 31px 10px;
+}
+	.howtobuy__text::after{
+		content: none;
+	}
+	.section__deals {
+		padding-bottom: 25px;
+	}
+	.section__aboutus{
+		padding-top: 25px;
+	}
+	.aboutus__inner p{
+		font-size: 16px;
+	}
+	.section__howtobuy{
+		padding-top: 50px;
+	}
+}
