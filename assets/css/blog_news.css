@@ -634,7 +634,7 @@
   .blog .article_head h1 {
     font-size: 56px;
     color: #fff;
-    text-transform: uppercase;
+    text-transform: initial;
     line-height: 1.339;
     text-align: center
   }
