@@ -1801,7 +1801,7 @@ align-items: center;
   border-radius: 10px;
 }
 
-.close {
+.video-modal .close {
   position: absolute;
   top: -30px;
   right: 0;
