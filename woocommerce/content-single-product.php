@@ -461,7 +461,7 @@ $upload_dir = wp_get_upload_dir();
                        data-target="#rating-body-4"><?php _e( 'FAQ', 'gladiator' ); ?></a></li><?php } ?>
             </ul>
            
-                      <div class="advantages_item_wrap d-flex">
+            <div class="advantages_item_wrap d-flex">
 
               <?php
                 $repeater= get_field('advantages', 'options');
