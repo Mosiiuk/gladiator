@@ -465,7 +465,7 @@ $upload_dir = wp_get_upload_dir();
             <div class="advantages_section">
 
               <h3 class="advantages_title">What Happens After Order</h3>
-              <div class="advantages_item_wrap d-flex">
+              <div class="advantages-block_item_wrap d-flex">
                 <div class="advantage_item wow animate__animated animate__zoomIn" data-wow-delay="0s">
                     <div class="advantage_item__step-number">1</div>
                     <img class="advantage_item__image" src="/src/assets/img/what-happens-icon-1.svg" alt="icon">
