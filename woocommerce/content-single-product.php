@@ -443,78 +443,6 @@ $upload_dir = wp_get_upload_dir();
           </div>
 
           
-                    <div class="advantages_item_wrap d-flex">
-
-              <?php
-                $repeater= get_field('advantages', 'options');
-                if ( is_array($repeater) && count($repeater) )
-                {
-                   foreach ($repeater as $key => $item)
-                   {
-                        $img = $item['icon'];
-
-                        echo "
-                        <div class=\"advantages_item\">
-                          <div class=\"advantages_item_icon\">
-                            <img src=\"$img[url]\" alt=\"\">
-                          </div>
-                          <p>
-                           $item[text]
-                          </p>
-                        </div>
-                        ";
-                   }
-                }
-              ?>
-              <!--
-            <div class="advantages_item">
-              <div class="advantages_item_icon">
-                <img src="<?php echo theme_url; ?>/img/advantages_item_icon_1.svg" alt="">
-              </div>
-              <p>
-                We'll start your order quickly
-                We get the job done Fast
-                You'll be paired with PRO Players
-              </p>
-
-
-            </div>
-
-            <div class="advantages_item">
-              <div class="advantages_item_icon">
-                <img src="<?php echo theme_url; ?>/img/advantages_item_icon_2.svg" alt="">
-              </div>
-              <p>
-                Payments are 100% Safe as we use the largest payment processor (stripe)in the world
-              </p>
-
-
-            </div>
-
-            <div class="advantages_item">
-              <div class="advantages_item_icon">
-                <img src="<?php echo theme_url; ?>/img/advantages_item_icon_3.svg" alt="">
-
-              </div>
-              <p>
-                You are 100% Guaranteed full result of your order, nothing less
-              </p>
-
-            </div>
-
-            <div class="advantages_item">
-              <div class="advantages_item_icon">
-                <img src="<?php echo theme_url; ?>/img/advantages_item_icon_4.svg" alt="">
-
-              </div>
-              <p>
-                You get cashback on orders
-                Our price is 45% lower than other sites
-              </p>
-
-            </div>
--->
-          </div>
           <div class="rating__tabs">
             <ul class="tabs__head js-tab-head-box">
 							<?php if ( get_field( 'description_text' ) ) { ?>
@@ -533,6 +461,34 @@ $upload_dir = wp_get_upload_dir();
                 <li><a href="#" class="js-tab-head"
                        data-target="#rating-body-4"><?php _e( 'FAQ', 'gladiator' ); ?></a></li><?php } ?>
             </ul>
+
+            <div class="advantages_section">
+
+              <h3 class="advantages_title">What Happens After Order</h3>
+              <div class="advantages_item_wrap d-flex">
+                <div class="advantage_item wow animate__animated animate__zoomIn" data-wow-delay="0s">
+                    <div class="advantage_item__step-number">1</div>
+                    <img class="advantage_item__image" src="/src/assets/img/what-happens-icon-1.svg" alt="icon">
+                    <p>We contact you on discord within 5 minutes of ordering</p>
+                </div>
+                <div class="advantage_item wow animate__animated animate__zoomIn" data-wow-delay="0.2s">
+                    <div class="advantage_item__step-number">2</div>
+                    <img class="advantage_item__image" src="/src/assets/img/what-happens-icon-2.svg" alt="icon">
+                    <p>We confirm all details & start</p>
+                </div>
+                <div class="advantage_item wow animate__animated animate__zoomIn" data-wow-delay="0.4s">
+                    <div class="advantage_item__step-number">3</div>
+                    <img class="advantage_item__image" src="/src/assets/img/what-happens-icon-3.svg" alt="icon">
+                    <p>After completion, we ask you for a review</p>
+                </div>
+                <div class="advantage_item wow animate__animated animate__zoomIn" data-wow-delay="0.6s">
+                    <div class="advantage_item__step-number">4</div>
+                    <img class="advantage_item__image" src="/src/assets/img/what-happens-icon-4.svg" alt="icon">
+                    <p>We send you a discount code for next time!</p>
+                </div>
+
+              </div>
+            </div>
            
             <ul class="rating__body">
 							<?php if ( get_field( 'description_text' ) ) { ?>
