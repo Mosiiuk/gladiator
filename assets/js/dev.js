@@ -1201,7 +1201,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //2026//////////////////////////////////////////////////////////////////
 
-// FIXED BUY BTN ORDER (vanilla JS)
+// FIXED BUY BTN ORDER (vanilla JS) ===========================================================
 
 function isPastElement(element) {
   if (!element) return false;
@@ -1234,4 +1234,24 @@ window.addEventListener('resize', checkCartButton);
 // initial check
 document.addEventListener('DOMContentLoaded', checkCartButton);
 
-//
+//INFO TOOLTIP ================================================================================
+
+document.addEventListener('click', function(e) {
+  const icon = e.target.closest('.info-icon-text');
+
+  if (icon) {
+    document.querySelectorAll('.info-tooltip').forEach(t => t.remove());
+
+    if (!icon.querySelector('.info-tooltip')) {
+      const tooltip = document.createElement('div');
+      tooltip.className = 'info-tooltip';
+      tooltip.textContent = icon.dataset.info;
+      icon.appendChild(tooltip);
+    }
+
+    e.stopPropagation();
+    return;
+  }
+
+  document.querySelectorAll('.info-tooltip').forEach(t => t.remove());
+});
