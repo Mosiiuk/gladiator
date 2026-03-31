@@ -8152,7 +8152,7 @@ header .container-xxl {
     text-align: left
 }
 
-.balance__block {
+.profile__block-item-large div.balance__block {
     text-align: left;
     width: 100%
 }
