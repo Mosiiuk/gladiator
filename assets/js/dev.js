@@ -1264,19 +1264,21 @@ const iframe = document.getElementById('videoFrame');
 
 const videoUrl = "https://www.youtube.com/embed/nwM_dbpK8w4?autoplay=1";
 
-openBtn.addEventListener('click', () => {
-  modal.style.display = 'block';
-  iframe.src = videoUrl;
-});
+if (openBtn && modal && closeBtn && iframe) {
+  openBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+    iframe.src = videoUrl;
+  });
 
-closeBtn.addEventListener('click', () => {
-  modal.style.display = 'none';
-  iframe.src = '';
-});
-
-window.addEventListener('click', (e) => {
-  if (e.target === modal) {
+  closeBtn.addEventListener('click', () => {
     modal.style.display = 'none';
     iframe.src = '';
-  }
-});
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+      iframe.src = '';
+    }
+  });
+}
