@@ -1692,6 +1692,7 @@ align-items: center;
   line-height: 1.2;
   font-weight: 400;
   text-transform: uppercase;
+  margin-inline: auto;
 }
 .watch-btn svg {
   width: 24px;
@@ -1742,6 +1743,7 @@ align-items: center;
 .contact__item .num {
   width: 32px;
   height: 32px;
+  min-width: 32px;
   background: #fff;
   color: #000;
   border-radius: 50%;
@@ -1750,6 +1752,7 @@ align-items: center;
   justify-content: center;
   font-weight: 700;
   font-size: 20px;
+  position: relative;
 }
 .contact__item .num::after {
   content: "";
