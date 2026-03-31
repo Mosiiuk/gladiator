@@ -60,7 +60,13 @@ function skripts_and_styles(){
     wp_enqueue_script('swiper-bundle-script', get_template_directory_uri().'/assets/js/swiper-bundle.min.js', array(),null, true );
 
 
-    wp_enqueue_script('dev-theme-script', get_template_directory_uri() . '/assets/js/dev.js', array(), '3.1.1', true );//in footer
+    wp_enqueue_script(
+        'dev-theme-script',
+        get_template_directory_uri() . '/assets/js/dev.js',
+        array(),
+        filemtime( get_template_directory() . '/assets/js/dev.js' ),
+        true
+    );//in footer
 
     wp_enqueue_script('spincrement-script', get_template_directory_uri() . '/assets/js/jquery.spincrement.min.js', array(), '1.0', true );
     wp_enqueue_script('main-theme-script', get_template_directory_uri() . '/assets/js/main_new.js', array(), '2.1', true );
