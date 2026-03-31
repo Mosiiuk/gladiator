@@ -394,7 +394,7 @@ flex-direction: column;
   color: rgba(255 255 255 / 50%);
 }
 
-.advantages_item_wrap{
+.advantages_section{
   margin: 40px 0 64px;
   gap: 40px;
   padding: 30px 40px 60px;
