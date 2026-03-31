@@ -427,14 +427,7 @@ flex-direction: column;
     width: 100%;
   }
 }
-
-.advantages_item_wrap .advantage_item p{
-  font-size: 16px;
-  color: #FFFFFF;
-  text-align: center;
-}
-.advantages_item_wrap .advantage_item:not(:last-child) {
-  &::after {
+.advantages_item_wrap .advantage_item:not(:last-child)::after {
     content: "";
     position: absolute;
     left: 100%;
@@ -442,9 +435,11 @@ flex-direction: column;
     width: 53px;
     height: 1px;
     background: linear-gradient(90deg, rgba(54, 164, 242, 0) 0%, #FFFFFF 51.5%, rgba(61, 165, 242, 0) 100%);
-    @media screen and (max-width: 991px) {
-     display: none;
-    }
+    transform: translateY(-50%);
+}
+@media screen and (max-width: 991px) {
+  .advantages_item_wrap .advantage_item:not(:last-child)::after {
+   display: none;
   }
 }
 .advantage_item__image {
@@ -468,24 +463,26 @@ flex-direction: column;
   background: #FFFFFF;
   color: #000000;
   z-index: 5;
-  &:after {
-    content: "";
-    position: absolute;
-    left: -4px;
-    top: -4px;
-    width: 40px;
-    height: 40px;
-    background: #FFFFFF33;
-    display: inline-block;
-    border-radius: 50%;
-  }
+}
+.advantage_item__step-number::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: -4px;
+  width: 40px;
+  height: 40px;
+  background: #FFFFFF33;
+  display: inline-block;
+  border-radius: 50%;
 }
 h3.advantages_title {
   font-weight: 600;
   margin-bottom: 60px;
-  @media screen and (max-width: 575px) {
-   text-align: center;
-  }
+}
+@media screen and (max-width: 575px) {
+ h3.advantages_title {
+  text-align: center;
+ }
 }
 .rating__body li{
   padding-top: 0;
@@ -498,6 +495,12 @@ h3.advantages_title {
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   color: #fff;
+}
+.advantages_item_wrap .advantage_item p{
+  font-size: 16px;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 1.2;
 }
 .section__intro__mini strong {
   color: #ffb800;
@@ -1595,8 +1598,4 @@ align-items: center;
 }
 .profile__blocks-wrapper .profile__block-item:nth-child(1) {
   z-index: 2;
-}
-h3.advantages_title {
-  font-weight: 600;
-  margin-bottom: 60px;
 }
