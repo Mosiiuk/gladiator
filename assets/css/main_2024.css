@@ -8332,7 +8332,7 @@ header .container-xxl {
     align-items: center;
     column-gap: 4px;
     font-family: Outfit-f, sans-serif;
-    text-transform: capitalize;
+    text-transform: capitalize
 }
 
 .checkout__wrapper .woocommerce-cart-form__contents .product-remove .close {
@@ -8340,7 +8340,7 @@ header .container-xxl {
     color: #f54148;
     float: none;
     text-shadow: none;
-    opacity: 1;
+    opacity: 1
 }
 
 
@@ -8769,24 +8769,21 @@ h1 {
 
 @media screen and (max-width:1279px) {
     .hero__games {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 1fr)
     }
 }
 
 @media screen and (max-width:991px) {
     .hero__games {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr)
     }
 }
 
 @media screen and (max-width:767px) {
     .hero__games {
-       grid-template-columns: repeat(2, 1fr);
+       grid-template-columns: repeat(2, 1fr)
     }
 }
-
-
-
 
 .hero__games-item {
     position: relative;
