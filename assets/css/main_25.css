@@ -826,13 +826,6 @@ max-width: 200px;
   flex: 133px;
 }
 
-.gold_custom_amount_hint{
-  margin: 0 40px 14px;
-  font-size: 16px;
-  line-height: 24px;
-  color: rgba(255, 255, 255, 0.72);
-}
-
 .gold_custom_amount{
   display: flex;
   align-items: center;
@@ -1324,9 +1317,6 @@ align-items: center;
   .server_choose_wrap{
     padding-inline: 20px;
   }
-  .gold_custom_amount_hint{
-    margin-inline: 20px;
-  }
   .gold_custom_amount{
     margin-inline: 20px;
   }
@@ -1350,10 +1340,6 @@ align-items: center;
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
-  }
-  .gold_custom_amount_hint{
-    font-size: 14px;
-    line-height: 20px;
   }
   .gold_custom_amount_value input{
     max-width: 60px;
@@ -1648,6 +1634,8 @@ align-items: center;
   margin-top: 20px;
   font-size: 32px;
   color: #FFFFFF;
+  width: 1061px;
+  max-width: 100%;
 }
   @media screen and (max-width: 1279px) {
  .order__successfull-text {
@@ -1663,4 +1651,27 @@ align-items: center;
 .order__successfull-logo {
   width: 92px;
   height: auto;
+}
+
+
+
+.video-modal__content {
+  position: relative;
+  width: 80%;
+  max-width: 800px;
+  margin: 100px auto;
+}
+
+.video-modal iframe {
+  width: 100%;
+  height: 450px;
+  border-radius: 10px;
+}
+
+.close {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  font-size: 30px;
+  cursor: pointer;
 }
