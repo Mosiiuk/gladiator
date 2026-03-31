@@ -1603,7 +1603,7 @@ align-items: center;
   background: url(../../img/hero-bg.png) no-repeat;
   background-size: cover;
 }
-.order__successfull-title-styles {
+.order__successfull-title-styles, .woocommerce-order.container.section__intro__mini h2.order__successfull-title-styles {
   text-align: center;
   font-size: 56px;
   font-weight: 600;
@@ -1614,17 +1614,17 @@ align-items: center;
   color: #098CEC;
 }
 @media screen and (max-width: 1279px) {
- .order__successfull-title-styles {
+ .order__successfull-title-styles, .woocommerce-order.container.section__intro__mini h2.order__successfull-title-styles {
    font-size: 40px;
  }
 }
 @media screen and (max-width: 991px) {
- .order__successfull-title-styles {
+ .order__successfull-title-styles, .woocommerce-order.container.section__intro__mini h2.order__successfull-title-styles {
    font-size: 32px;
  }
 }
 @media screen and (max-width: 767px) {
- .order__successfull-title-styles {
+ .order__successfull-title-styles, .woocommerce-order.container.section__intro__mini h2.order__successfull-title-styles {
    font-size: 26px;
  }
 }
