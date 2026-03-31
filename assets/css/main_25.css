@@ -1502,7 +1502,7 @@ align-items: center;
 }
 .info-tooltip {
   position: absolute;
-  width: 260px;
+  width: 150px;
   background: #FFFFFF;
   color: #121212;
   font-size: 12px;
