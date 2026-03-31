@@ -111,34 +111,41 @@ defined( 'ABSPATH' ) || exit;
 			<h3 class="how-to-contacts__title">How to contact us</h3>
 
 			<div class="contact__grid">
-			
-			<div class="contact__item">
-				<div class="num">1</div>
-				<div>
-					<h3>Join Our Discord Gateway Server</h3>
-					<p>Link: <a href="https://discord.com/invite/ZVa5Np3kR">discord.gg/ZVa5Np3kR</a></p>
-					<p>This server ONLY allows us to appear in your DMs — nothing else.</p>
+				
+				<div class="contact__item">
+					<div class="num">1</div>
+					<div>
+						<h3>Join Our Discord Gateway Server</h3>
+						<p>Link: <a href="https://discord.com/invite/ZVa5Np3kR">discord.gg/ZVa5Np3kR</a></p>
+						<p>This server ONLY allows us to appear in your DMs — nothing else.</p>
+					</div>
 				</div>
+
+				<div class="contact__item">
+					<div class="num">2</div>
+					<div>
+						<h3>Open Your Discord Search Bar</h3>
+						<p>Go to: Find or Start a Conversation</p>
+						<p>Type: <strong>gladiatorboost2024</strong></p>
+					</div>
+				</div>
+
+				<div class="contact__item">
+					<div class="num">3</div>
+					<div>
+						<h3>Send Us a Direct Message</h3>
+						<p>Click our profile → Send a DM with your order number</p>
+						<p>This connects you directly to your assigned GladiatorBoost manager.</p>
+					</div>
+				</div>
+
 			</div>
 
-			<div class="contact__item">
-				<div class="num">2</div>
-				<div>
-					<h3>Open Your Discord Search Bar</h3>
-					<p>Go to: Find or Start a Conversation</p>
-					<p>Type: <strong>gladiatorboost2024</strong></p>
-			    </div>
-			</div>
-
-			<div class="contact__item">
-				<div class="num">3</div>
-				<div>
-					<h3>Send Us a Direct Message</h3>
-					<p>Click our profile → Send a DM with your order number</p>
-					<p>This connects you directly to your assigned GladiatorBoost manager.</p>
-			    </div>
-			</div>
-
+			<ul class="order-successfull__check-block">
+				<li>Troubleshooting (if needed)</li>
+				<li>Try searching @gladiatorboost2024</li>
+				<li>Enable: Privacy → “Allow messages from server members”</li>
+				<li>After joining the server, you will see us in your DM list</li>
 			</div>
 		</div>
 

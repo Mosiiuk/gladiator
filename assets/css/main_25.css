@@ -1809,3 +1809,12 @@ align-items: center;
    font-size: 20px;
  }
 }
+.order-successfull__check-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #FFFFFF;
+  font-weight: 400;
+  line-height: 1.2;
+  font-size: 16px;
+}
