@@ -461,7 +461,7 @@ $upload_dir = wp_get_upload_dir();
                 <li><a href="#" class="js-tab-head"
                        data-target="#rating-body-4"><?php _e( 'FAQ', 'gladiator' ); ?></a></li><?php } ?>
             </ul>
-
+            <!--new section -->
             <div class="advantages_section">
 
               <h3 class="advantages_title">What Happens After Order</h3>
