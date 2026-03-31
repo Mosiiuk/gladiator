@@ -442,7 +442,26 @@ $upload_dir = wp_get_upload_dir();
 
           </div>
 
-          <div class="advantages_item_wrap d-flex">
+          <div class="rating__tabs">
+            <ul class="tabs__head js-tab-head-box">
+							<?php if ( get_field( 'description_text' ) ) { ?>
+                <li><a href="#" class="active js-tab-head"
+                       data-target="#rating-body-1"><?php _e( 'Description', 'gladiator' ); ?></a></li>
+							<?php } ?>
+							<?php if ( get_field( 'how_to_buy_text' ) ) { ?>
+                <li><a href="#" class="js-tab-head"
+                       data-target="#rating-body-2"><?php _e( 'How it Works', 'gladiator' ); ?></a></li>
+							<?php } ?>
+							<?php if ( get_field( 'requirements_text' ) ) { ?>
+                <li><a href="#" class="js-tab-head"
+                       data-target="#rating-body-3"><?php _e( 'Requirements', 'gladiator' ); ?></a></li>
+							<?php } ?>
+							<?php if ( get_field( 'faq_text' ) ) { ?>
+                <li><a href="#" class="js-tab-head"
+                       data-target="#rating-body-4"><?php _e( 'FAQ', 'gladiator' ); ?></a></li><?php } ?>
+            </ul>
+           
+                      <div class="advantages_item_wrap d-flex">
 
               <?php
                 $repeater= get_field('advantages', 'options');
@@ -515,24 +534,6 @@ $upload_dir = wp_get_upload_dir();
 -->
           </div>
 
-          <div class="rating__tabs">
-            <ul class="tabs__head js-tab-head-box">
-							<?php if ( get_field( 'description_text' ) ) { ?>
-                <li><a href="#" class="active js-tab-head"
-                       data-target="#rating-body-1"><?php _e( 'Description', 'gladiator' ); ?></a></li>
-							<?php } ?>
-							<?php if ( get_field( 'how_to_buy_text' ) ) { ?>
-                <li><a href="#" class="js-tab-head"
-                       data-target="#rating-body-2"><?php _e( 'How it Works', 'gladiator' ); ?></a></li>
-							<?php } ?>
-							<?php if ( get_field( 'requirements_text' ) ) { ?>
-                <li><a href="#" class="js-tab-head"
-                       data-target="#rating-body-3"><?php _e( 'Requirements', 'gladiator' ); ?></a></li>
-							<?php } ?>
-							<?php if ( get_field( 'faq_text' ) ) { ?>
-                <li><a href="#" class="js-tab-head"
-                       data-target="#rating-body-4"><?php _e( 'FAQ', 'gladiator' ); ?></a></li><?php } ?>
-            </ul>
             <ul class="rating__body">
 							<?php if ( get_field( 'description_text' ) ) { ?>
                 <li class="js-tab-body" id="rating-body-1"
