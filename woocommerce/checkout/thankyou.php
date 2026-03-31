@@ -93,6 +93,12 @@ defined( 'ABSPATH' ) || exit;
 
 			</ul>
 
+           <!--NEW HTML CODE-->
+		   <p class=""></p>
+
+
+
+
             <div class="thankyou_text">
                 <h2><?php echo get_field('thank_you_page_title','options'); ?></h2>
                 <?php echo get_field('thank_you_page_text','options'); ?>
