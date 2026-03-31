@@ -91,6 +91,97 @@ function get_menu_from_cat($categories){
     }
 }
 
+function gladiator_get_product_category_terms($product_id) {
+    $terms = get_the_terms($product_id, 'product_cat');
+
+    if (is_wp_error($terms) || !is_array($terms)) {
+        return [];
+    }
+
+    return array_values(array_filter($terms, static function ($term) {
+        return $term instanceof WP_Term && (int) $term->term_id !== 15;
+    }));
+}
+
+function gladiator_get_product_primary_category($product_id) {
+    $terms = gladiator_get_product_category_terms($product_id);
+
+    if (!$terms) {
+        return null;
+    }
+
+    usort($terms, static function ($left, $right) {
+        $left_depth = count(get_ancestors($left->term_id, 'product_cat', 'taxonomy'));
+        $right_depth = count(get_ancestors($right->term_id, 'product_cat', 'taxonomy'));
+
+        if ($left_depth === $right_depth) {
+            return $left->term_id <=> $right->term_id;
+        }
+
+        return $right_depth <=> $left_depth;
+    });
+
+    return $terms[0];
+}
+
+function gladiator_get_product_main_category($product_id) {
+    $primary_category = gladiator_get_product_primary_category($product_id);
+
+    if (!$primary_category instanceof WP_Term) {
+        return null;
+    }
+
+    $ancestors = get_ancestors($primary_category->term_id, 'product_cat', 'taxonomy');
+
+    if (!$ancestors) {
+        return $primary_category;
+    }
+
+    $main_category_id = end($ancestors);
+    $main_category = get_term($main_category_id, 'product_cat');
+
+    return $main_category instanceof WP_Term ? $main_category : $primary_category;
+}
+
+function gladiator_get_product_category_chain($product_id) {
+    $primary_category = gladiator_get_product_primary_category($product_id);
+
+    if (!$primary_category instanceof WP_Term) {
+        return [];
+    }
+
+    $chain = [];
+    $ancestor_ids = array_reverse(get_ancestors($primary_category->term_id, 'product_cat', 'taxonomy'));
+
+    foreach ($ancestor_ids as $ancestor_id) {
+        $ancestor = get_term($ancestor_id, 'product_cat');
+
+        if ($ancestor instanceof WP_Term && (int) $ancestor->term_id !== 15) {
+            $chain[] = $ancestor;
+        }
+    }
+
+    $chain[] = $primary_category;
+
+    return $chain;
+}
+
+function gladiator_render_product_breadcrumb($product_id = 0) {
+    $product_id = $product_id ?: get_the_ID();
+
+    if (!$product_id) {
+        return;
+    }
+
+    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
+
+    foreach (gladiator_get_product_category_chain($product_id) as $category) {
+        echo '<li><a href="' . esc_url(get_term_link($category)) . '">' . esc_html($category->name) . '</a></li>';
+    }
+
+    echo '<li>' . esc_html(get_the_title($product_id)) . '</li>';
+}
+
 
 // The Image
 
@@ -468,4 +559,3 @@ function modify_search_query($query_vars) {
     return $query_vars;
 }
 add_filter('request', 'modify_search_query');
-
