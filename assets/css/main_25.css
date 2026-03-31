@@ -826,7 +826,7 @@ max-width: 200px;
   flex: 133px;
 }
 
-.gold_custom_amount_hint{
+.gold_choose_wrap .gold_custom_amount_hint{
   display: block;
   margin: 0;
   padding: 0 40px 14px;
@@ -1326,7 +1326,7 @@ align-items: center;
   .server_choose_wrap{
     padding-inline: 20px;
   }
-  .gold_custom_amount_hint{
+  .gold_choose_wrap .gold_custom_amount_hint{
     padding-inline: 20px;
   }
   .gold_custom_amount{
@@ -1353,7 +1353,7 @@ align-items: center;
     grid-template-columns: 1fr 1fr;
     width: 100%;
   }
-  .gold_custom_amount_hint{
+  .gold_choose_wrap .gold_custom_amount_hint{
     font-size: 14px;
     line-height: 20px;
   }
