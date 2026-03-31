@@ -398,7 +398,13 @@ flex-direction: column;
   margin-top: 40px;
   gap: 40px;
   padding: 30px 40px 60px;
-  background: url(../../img/what-happens-bg.png);
+  background: linear-gradient(180deg, #110940 0%, rgba(17, 9, 64, 0) 100%),
+  url('../../img/what-happens-bg.png');
+  background-repeat: no-repeat;
+  border: 2px solid;
+  border-image-source: linear-gradient(180deg, #162988 0%, rgba(31, 21, 89, 0) 100%);
+  border-image-slice: 1;
+  border-radius: 8px;
 }
 
 .advantages_item_wrap .advantages_item{
