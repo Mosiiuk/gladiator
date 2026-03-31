@@ -6444,7 +6444,8 @@ textarea {
 
 .footer {
     background: #06040f;
-    padding-block: 66px
+    padding-block: 66px;
+    z-index: -1
 }
 
 @media screen and (max-width:767px) {
