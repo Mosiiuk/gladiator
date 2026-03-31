@@ -1466,3 +1466,6 @@ align-items: center;
     background: transparent;
     opacity: 0;
 }
+.woocommerce-variation-add-to-cart .found_cheaper {
+  color:  #098cec;
+} 
