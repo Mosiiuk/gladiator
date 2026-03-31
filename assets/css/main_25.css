@@ -1494,11 +1494,11 @@ align-items: center;
   background: url(../../img/info.svg) no-repeat;
   position: relative;
 }
-  @media screen and (max-width: 575px) {
-    .info-icon {
+@media screen and (max-width: 575px) {
+  .info-icon {
     position: unset;
-    }
   }
+}
 .info-tooltip {
   position: absolute;
   top: 50%;
