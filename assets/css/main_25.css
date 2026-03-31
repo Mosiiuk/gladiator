@@ -1475,7 +1475,7 @@ align-items: center;
 .balance__label-wrapper {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     font-size: 16px;
     font-weight: 400;
     position: relative;
@@ -1492,6 +1492,7 @@ align-items: center;
   justify-content: center;
   cursor: pointer;
   background: url(../../img/info.svg) no-repeat;
+  background-size: contain;
   position: relative;
 }
 @media screen and (max-width: 575px) {
