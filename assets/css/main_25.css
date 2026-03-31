@@ -1457,4 +1457,12 @@ align-items: center;
     z-index: -1;
   }
 }
-
+.registration__form button.show-password-input {
+    position: absolute;
+    right: 0;
+    margin: 0;
+    top: 0;
+    padding: 10px;
+    background: transparent;
+    opacity: 0;
+}
