@@ -1599,3 +1599,10 @@ align-items: center;
   text-align: center;
   line-height: 1.2;
 }
+.order__successfull {
+  background: url(../../img/hero-bg.png) no-repeat;
+  background-size: cover;
+}
+.order__successfull {
+
+}
