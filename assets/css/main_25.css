@@ -1683,7 +1683,22 @@ align-items: center;
   display: flex;
   column-gap: 16px;
 }
-
+.contact__item h3 {
+  color: #098CEC;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+.contact__item p {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+  line-height: 1.2;
+  font-size: 16px;
+}
+.contact__item p:not(:last-child) {
+  margin-bottom: 8px;
+}
 .contact__item .num {
   width: 32px;
   height: 32px;
