@@ -1491,7 +1491,7 @@ align-items: center;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background: url(../../img/benefits__bg-blocks.png) no-repeat;
+  background: url(../../img/info.svg) no-repeat;
   position: relative;
 }
   @media screen and (max-width: 575px) {
