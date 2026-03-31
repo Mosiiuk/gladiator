@@ -8760,7 +8760,7 @@ h1 {
     display: flex;
     justify-content: flex-start;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-column-gap: 24px;
     grid-row-gap: 24px;
     margin-block: 72px 60px
@@ -8768,19 +8768,19 @@ h1 {
 
 @media screen and (max-width:1279px) {
     .hero__games {
-        grid-template-columns: repeat(4, 1fr)
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media screen and (max-width:991px) {
     .hero__games {
-        grid-template-columns: repeat(3, 1fr)
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media screen and (max-width:767px) {
     .hero__games {
-        grid-template-columns: repeat(2, 1fr)
+       grid-template-columns: repeat(2, 1fr);
     }
 }
 
