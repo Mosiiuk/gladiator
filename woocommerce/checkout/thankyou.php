@@ -116,7 +116,7 @@ defined( 'ABSPATH' ) || exit;
 					<div class="num">1</div>
 					<div>
 						<h3>Join Our Discord Gateway Server</h3>
-						<p>Link: <a href="https://discord.com/invite/ZVa5Np3kR">discord.gg/ZVa5Np3kR</a></p>
+						<p>Link: <a href="https://discord.com/invite/ZVa5Np3kR" target="blank">discord.gg/ZVa5Np3kR</a></p>
 						<p>This server ONLY allows us to appear in your DMs — nothing else.</p>
 					</div>
 				</div>
