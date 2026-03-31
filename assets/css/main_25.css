@@ -1716,6 +1716,12 @@ align-items: center;
   display: flex;
   column-gap: 16px;
 }
+@media screen and (max-width: 1279px) {
+ .contact__item {
+   flex-direction: column;
+   row-gap: 8px;
+ }
+}
 .section__intro__mini .contact__item h3 {
   font-size: 20px;
   line-height: 1.2;
@@ -1820,7 +1826,8 @@ align-items: center;
   font-size: 16px;
   padding-bottom: 120px;
   display: flex;
-  column-gap: 8px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 .order-successfull__check-block li {
   position: relative;
