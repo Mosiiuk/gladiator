@@ -1608,10 +1608,10 @@ align-items: center;
   font-size: 56px;
   font-weight: 600;
   line-height: 1.1;
-  color: #FFFFFF !important;
+  color: #FFFFFF;
 }
 .order__successfull-title-styles strong {
-  color: #098CEC !important;
+  color: #098CEC;
 }
 @media screen and (max-width: 1279px) {
  .order__successfull-title-styles {
@@ -1634,6 +1634,17 @@ align-items: center;
   font-size: 32px;
   color: #FFFFFF;
 }
+  @media screen and (max-width: 1279px) {
+ .order__successfull-text {
+   font-size: 24px;
+ }
+}
+@media screen and (max-width: 767px) {
+ .order__successfull-text {
+   font-size: 20px;
+ }
+}
+
 .order__successfull-logo {
   width: 92px;
   height: auto;
