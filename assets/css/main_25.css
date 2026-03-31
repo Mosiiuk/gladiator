@@ -1456,6 +1456,9 @@ align-items: center;
   body.is-fixed-cart .section__intro__mini .col-lg-9 {
     z-index: -1;
   }
+  .buttons .add_to_cart {
+    transition: none;
+  }
 }
 .registration__form button.show-password-input {
     position: absolute;
