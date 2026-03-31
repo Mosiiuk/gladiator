@@ -466,26 +466,7 @@ $upload_dir = wp_get_upload_dir();
               <h3 class="advantages_title">What Happens After Order</h3>
 
               <div class="advantages_item_wrap d-flex">
-                <?php
-                $repeater = get_field('advantages', 'options');
 
-                if (is_array($repeater) && count($repeater)) {
-                    foreach ($repeater as $item) {
-                        $img = $item['icon'];
-
-                        echo "
-                        <div class=\"advantages_item\">
-                          <div class=\"advantages_item_icon\">
-                            <img src=\"{$img['url']}\" alt=\"\">
-                          </div>
-                          <p>
-                            {$item['text']}
-                          </p>
-                        </div>
-                        ";
-                    }
-                }
-                ?>
               </div>
 
               <!--

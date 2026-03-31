@@ -395,7 +395,7 @@ flex-direction: column;
 }
 
 .advantages_item_wrap{
-  margin-top: 40px;
+  margin: 40px 0 64px;
   gap: 40px;
   padding: 30px 40px 60px;
   background: linear-gradient(180deg, #110940 0%, rgba(17, 9, 64, 0) 100%),
