@@ -94,7 +94,7 @@ defined( 'ABSPATH' ) || exit;
 			</ul>
 
            <!--NEW HTML CODE-->
-		   <p class="order__successfull-text"></p>
+		   <p class="order__successfull-text">Please follow the instructions below to contact us on Discord so we can start your order right away.</p>
 
 
 
