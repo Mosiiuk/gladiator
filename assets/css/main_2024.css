@@ -8815,7 +8815,7 @@ h1 {
 }
 
 .hero__games-item img {
-    aspect-ratio: .655;
+    aspect-ratio: 0.8;
     -o-object-fit: cover;
     object-fit: cover;
     transition: transform 555ms ease;
