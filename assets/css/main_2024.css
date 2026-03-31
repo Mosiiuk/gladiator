@@ -8761,7 +8761,7 @@ h1 {
     display: flex;
     justify-content: flex-start;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 24px;
     grid-row-gap: 24px;
     margin-block: 72px 60px
@@ -8816,7 +8816,7 @@ h1 {
 }
 
 .hero__games-item img {
-    aspect-ratio: 0.8;
+    aspect-ratio: 0.9;
     -o-object-fit: cover;
     object-fit: cover;
     transition: transform 555ms ease;
