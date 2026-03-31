@@ -8153,7 +8153,8 @@ header .container-xxl {
 }
 
 .balance__block {
-    text-align: left
+    text-align: left;
+    width: 100%;
 }
 
 .balance__block .balance__block-total {
