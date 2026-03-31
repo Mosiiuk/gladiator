@@ -1256,3 +1256,28 @@ document.addEventListener('click', function(e) {
 
   document.querySelectorAll('.info-tooltip').forEach(t => t.remove());
 });
+
+//ORDER SUCCESS VIDEO ==============================================================================
+const openBtn = document.getElementById('openVideo');
+const modal = document.getElementById('videoModal');
+const closeBtn = document.getElementById('closeVideo');
+const iframe = document.getElementById('videoFrame');
+
+const videoUrl = "https://www.youtube.com/embed/nwM_dbpK8w4?autoplay=1";
+
+openBtn.addEventListener('click', () => {
+  modal.style.display = 'block';
+  iframe.src = videoUrl;
+});
+
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+  iframe.src = '';
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+    iframe.src = '';
+  }
+});
