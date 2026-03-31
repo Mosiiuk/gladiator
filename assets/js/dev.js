@@ -1232,14 +1232,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // FIXED BUY BTN ORDER (vanilla JS)
 
-function isInViewport(element) {
+function isPastElement(element) {
   if (!element) return false;
 
   const rect = element.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-  );
+
+  // якщо верх елемента вже пройшов верх екрану
+  return rect.top < 0;
 }
 
 function checkCartButton() {
@@ -1251,7 +1250,7 @@ function checkCartButton() {
 
   if (!target) return;
 
-  if (!isInViewport(target)) {
+  if (isPastElement(target)) {
     document.body.classList.add('is-fixed-cart');
   } else {
     document.body.classList.remove('is-fixed-cart');
