@@ -1603,6 +1603,26 @@ align-items: center;
   background: url(../../img/hero-bg.png) no-repeat;
   background-size: cover;
 }
-.order__successfull {
-
+.order__successfull h2 {
+  text-align: center;
+  font-size: 56px;
+}
+@media screen and (max-width: 1279px) {
+ .order__successfull h2 {
+   font-size: 40px;
+ }
+}
+@media screen and (max-width: 991px) {
+ .order__successfull h2 {
+   font-size: 32px;
+ }
+}
+@media screen and (max-width: 767px) {
+ .order__successfull h2 {
+   font-size: 26px;
+ }
+}
+.order__successfull-logo {
+  width: 92px;
+  height: auto;
 }
