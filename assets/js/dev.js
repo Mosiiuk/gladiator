@@ -184,7 +184,9 @@ jQuery(document).ready(function ($) {
     radios.eq(nextIndex).prop("checked", true).trigger("change");
   });
 
-  $('#money_prod_buy').click(function(){
+  $('#money_prod_buy').click(function(e){
+      e.preventDefault();
+
       let prod_id = $(this).data('prod_id');
       let money_qtn = parseInt($('#gold_custom_amount_value').val());
       let server = $('input[name="server"]:checked').val();
@@ -221,6 +223,7 @@ jQuery(document).ready(function ($) {
         },
       });
 
+      return false;
   });
   //---------------------/money product----------------------------------
 
