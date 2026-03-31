@@ -446,7 +446,7 @@
                 <div class="profile__blocks-wrapper">
                     <div class="profile__block-item profile__block-item-large">
                         <div class="balance__block">
-                            <?php echo __('Balance','gladiator-theme');?> <span>$<?php echo $balance;?></span>
+                            <?php echo __('Store Credit Balance','gladiator-theme');?> <span>$<?php echo $balance;?></span>
                         </div>
                         <!--
                         <div class="add-funds__block">
