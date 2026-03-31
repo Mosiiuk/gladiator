@@ -446,9 +446,13 @@
                 <div class="profile__blocks-wrapper">
                     <div class="profile__block-item profile__block-item-large">
                         <div class="balance__block">
-                            <?php echo __('Balance','gladiator-theme');?> <span>$<?php echo $balance;?></span>
+                            <span class="balance__label-text">
+                                <?php echo __('Store Credit Balance','gladiator-theme'); ?>
+                            </span>
+                            <span class="info-icon info-icon-text" data-info="This is your store credit balance. You automatically gain Store credit by placing any orders on GladiatorBoost. Enjoy!"></span>
+                            <span>$<?php echo $balance; ?></span>
                         </div>
-                        <!--
+                                                <!--
                         <div class="add-funds__block">
                             <a href="#" class="btn-main btn-add-funds">
                                 <img src="<?php echo theme_url;?>/img/add_square.svg" alt="plus">Add funds
