@@ -446,13 +446,7 @@
                 <div class="profile__blocks-wrapper">
                     <div class="profile__block-item profile__block-item-large">
                         <div class="balance__block">
-                            <div class="balance__label-wrapper">
-                                <span class="balance__label-text">
-                                    <?php echo __('Store Credit Balance','gladiator-theme'); ?>
-                                </span>
-                                <span class="info-icon info-icon-text" data-info="This is your store credit balance. You automatically gain Store credit by placing any orders on GladiatorBoost. Enjoy!"></span>
-                            </div>
-                            <span class="balance__block-total">$<?php echo $balance; ?></span>
+                            <?php echo __('Balance','gladiator-theme');?> <span>$<?php echo $balance;?></span>
                         </div>
                         <!--
                         <div class="add-funds__block">
@@ -831,19 +825,22 @@
                         }
                         else
                         {
+                            $product_main_category = gladiator_get_product_main_category($theID);
 
-                            $product_parentCat     = get_the_terms( $theID, 'product_cat' );
-                            $product_parentCat_ID  = $product_parentCat[0]->term_id;
-                            $product_categories    = get_terms(
-                                array(
-                                    'taxonomy'   => 'product_cat',
-                                    'hide_empty' => false,
-                                    'parent'     => $product_parentCat_ID
-                                )
-                            );
+                            if ($product_main_category instanceof WP_Term) {
+                                $product_categories = get_terms(
+                                    array(
+                                        'taxonomy'   => 'product_cat',
+                                        'hide_empty' => false,
+                                        'parent'     => $product_main_category->term_id
+                                    )
+                                );
 
-                            if ($product_categories) {
-                                get_menu_from_cat($product_categories);
+                                if ($product_categories) {
+                                    get_menu_from_cat($product_categories);
+                                } else {
+                                    get_menu_from_cat(array($product_main_category));
+                                }
                             }
                         }
 
