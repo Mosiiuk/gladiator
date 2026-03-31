@@ -1479,8 +1479,11 @@ align-items: center;
     font-size: 16px;
     font-weight: 400;
     position: relative;
-  }
-
+}
+.balance__label-wrapper .balance__label-text {
+    white-space: normal;  
+    overflow-wrap: break-word; 
+}
 .info-icon {
   width: 16px;
   height: 16px;
@@ -1488,12 +1491,14 @@ align-items: center;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background: url(/src/assets/img/info.svg) no-repeat;
+  background: url(../../img/benefits__bg-blocks.png) no-repeat;
   position: relative;
-  @media screen and (max-width: 575px) {
-    position: unset;
-  }
 }
+  @media screen and (max-width: 575px) {
+    .info-icon {
+    position: unset;
+    }
+  }
 .info-tooltip {
   position: absolute;
   top: 50%;
