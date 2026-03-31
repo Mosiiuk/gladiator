@@ -8156,7 +8156,7 @@ header .container-xxl {
     text-align: left
 }
 
-.balance__block span {
+.balance__block .balance__block-total {
     display: block;
     width: 100%;
     font-size: 24px;
