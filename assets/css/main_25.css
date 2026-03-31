@@ -830,6 +830,8 @@ max-width: 200px;
   display: block;
   margin: 0 40px 14px !important;
   max-width: calc(100% - 80px);
+  padding-left: 40px !important;
+  padding-right: 40px !important;
   font-size: 16px !important;
   line-height: 24px !important;
   color: rgba(255, 255, 255, 0.72) !important;
@@ -1329,6 +1331,8 @@ align-items: center;
   .gold_choose_wrap p.gold_custom_amount_hint{
     margin-inline: 20px !important;
     max-width: calc(100% - 40px);
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
   .gold_custom_amount{
     margin-inline: 20px;
