@@ -1237,7 +1237,6 @@ function isPastElement(element) {
 
   const rect = element.getBoundingClientRect();
 
-  // якщо верх елемента вже пройшов верх екрану
   return rect.top < 0;
 }
 
