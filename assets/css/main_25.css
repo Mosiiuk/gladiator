@@ -828,7 +828,7 @@ max-width: 200px;
 
 .gold_choose_wrap p.gold_custom_amount_hint{
   display: block;
-  margin: 0 40px 14px !important;
+  margin: 14px 40px 0 !important;
   max-width: calc(100% - 80px);
   padding-left: 40px !important;
   padding-right: 40px !important;
@@ -1329,7 +1329,7 @@ align-items: center;
     padding-inline: 20px;
   }
   .gold_choose_wrap p.gold_custom_amount_hint{
-    margin-inline: 20px !important;
+    margin: 14px 20px 0 !important;
     max-width: calc(100% - 40px);
     padding-left: 20px !important;
     padding-right: 20px !important;

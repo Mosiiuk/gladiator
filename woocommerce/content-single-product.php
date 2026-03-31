@@ -186,9 +186,6 @@ $upload_dir = wp_get_upload_dir();
                     <input type="hidden" id="money_per_quantity" value="<?php echo $per_quantity;?>" >
 
                 </div>
-
-                <p class="gold_custom_amount_hint">Need a custom amount? Enter exactly how much you need here!</p>
-
                 <div class="gold_custom_amount">
 
                   <span class="gold_custom_amount_count gold_custom_amount_minus">-</span>
@@ -200,6 +197,8 @@ $upload_dir = wp_get_upload_dir();
                   <span class="gold_custom_amount_count gold_custom_amount_plus">+</span>
 
                 </div>
+
+                <p class="gold_custom_amount_hint">Need a custom amount? Enter exactly how much you need here!</p>
 
                 <div class="gold_total_wrap">
 

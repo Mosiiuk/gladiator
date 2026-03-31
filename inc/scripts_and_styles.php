@@ -37,6 +37,11 @@ function skripts_and_styles(){
 		false
 	);
 
+	wp_add_inline_style(
+		'main-theme-style_25',
+		'.gold_choose_wrap p.gold_custom_amount_hint{margin:0 40px 14px!important;max-width:calc(100% - 80px);font-size:16px!important;line-height:24px!important;color:rgba(255,255,255,.72)!important}.gold_choose_wrap p.gold_custom_amount_hint strong{color:inherit}@media screen and (max-width:1279px){.gold_choose_wrap p.gold_custom_amount_hint{margin-inline:20px!important;max-width:calc(100% - 40px)}}@media screen and (max-width:575px){.gold_choose_wrap p.gold_custom_amount_hint{font-size:14px!important;line-height:20px!important}}'
+	);
+
     wp_enqueue_script('parallax-script', get_template_directory_uri() . '/assets/js/parallax.min.js', array(), '1.0', true );
     wp_enqueue_script('nice-select-script', get_template_directory_uri() . '/assets/js/jquery.nice-select.min.js', array(), '1.0', true );//in footer
 
