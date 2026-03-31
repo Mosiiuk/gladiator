@@ -397,7 +397,8 @@ flex-direction: column;
 .advantages_item_wrap{
   margin-top: 40px;
   gap: 40px;
-  background: url(../../img/);
+  padding: 30px 40px 60px;
+  background: url(../../img/what-happens-bg.png);
 }
 
 .advantages_item_wrap .advantages_item{
