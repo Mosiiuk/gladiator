@@ -1702,6 +1702,7 @@ align-items: center;
   display: flex;
   gap: 20px;
   justify-content: space-between;
+  margin: 22px 0 38px;
 }
 
 .contact__item {
@@ -1729,6 +1730,10 @@ align-items: center;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.5);
   margin-bottom: 16px;
+}
+.section__intro__mini .contact__item p a, .section__intro__mini .contact__item p strong{
+  font-weight: 700;
+  color: #FFFFFF;
 }
 .section__intro__mini .contact__item p:not(:last-child) {
   margin-bottom: 8px;

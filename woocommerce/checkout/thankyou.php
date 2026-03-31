@@ -118,8 +118,8 @@ defined( 'ABSPATH' ) || exit;
 				<div class="num">1</div>
 				<div>
 					<h3>Join Our Discord Gateway Server</h3>
-					<p>Link: <a href="#"></a>discord.gg/ZVa5Np3kR</p>
-					<span>This server ONLY allows us to appear in your DMs – nothing else.</span>`
+					<p>Link: <a href="https://discord.com/invite/ZVa5Np3kR">discord.gg/ZVa5Np3kR</a></p>
+					<p>This server ONLY allows us to appear in your DMs — nothing else.</p>
 				</div>
 			</div>
 
@@ -128,7 +128,7 @@ defined( 'ABSPATH' ) || exit;
 				<div>
 					<h3>Open Your Discord Search Bar</h3>
 					<p>Go to: Find or Start a Conversation</p>
-					<span>Type: gladiatorboost2024</span>
+					<p>Type: <strong>gladiatorboost2024</strong></p>
 			    </div>
 			</div>
 
@@ -137,7 +137,7 @@ defined( 'ABSPATH' ) || exit;
 				<div>
 					<h3>Send Us a Direct Message</h3>
 					<p>Click our profile → Send a DM with your order number</p>
-					<span>This connects you directly to your manager.</span>
+					<p>This connects you directly to your assigned GladiatorBoost manager.</p>
 			    </div>
 			</div>
 
