@@ -184,9 +184,7 @@ jQuery(document).ready(function ($) {
     radios.eq(nextIndex).prop("checked", true).trigger("change");
   });
 
-  $('#money_prod_buy').click(function(e){
-      e.preventDefault();
-
+  $('#money_prod_buy').click(function(){
       let prod_id = $(this).data('prod_id');
       let money_qtn = parseInt($('#gold_custom_amount_value').val());
       let server = $('input[name="server"]:checked').val();
@@ -219,57 +217,13 @@ jQuery(document).ready(function ($) {
         url: ajaxurl.url,
         data: data,
         success: function (data) {
-          refreshMiniCart(true);
+          //let obj = jQuery.parseJSON(data);
+          window.location.reload();
         },
       });
 
-      return false;
   });
   //---------------------/money product----------------------------------
-
-  function openMiniCart() {
-    const $cartWrapper = $('.checkout__wrapper');
-    const $cartButton = $('.btn__cart');
-
-    if (!$cartWrapper.length) {
-      return;
-    }
-
-    $cartWrapper
-      .stop(true, true)
-      .css({
-        display: 'block',
-        zIndex: 30,
-      })
-      .slideDown()
-      .addClass('open');
-
-    $cartButton.addClass('active');
-  }
-
-  function refreshMiniCart(openAfterRefresh) {
-    $.get(window.location.href, function(response) {
-      const $response = $('<div>').append($.parseHTML(response));
-      const minicartHtml = $response.find('#form_minicart').html();
-      const cartCountHtml = $response.find('.btn__cart .b-count').html();
-
-      if (typeof minicartHtml !== 'undefined') {
-        $('#form_minicart').html(minicartHtml);
-      }
-
-      if (typeof cartCountHtml !== 'undefined') {
-        $('.btn__cart .b-count').html(cartCountHtml);
-      }
-
-      if (openAfterRefresh) {
-        openMiniCart();
-      }
-    }).fail(function() {
-      if (openAfterRefresh) {
-        openMiniCart();
-      }
-    });
-  }
 
 
 
@@ -489,7 +443,7 @@ jQuery(document).ready(function ($) {
   });*/
 
   if (localStorage.getItem('show_minicart') === 'true') {
-    openMiniCart();
+    $('.btn__cart').click();
     localStorage.removeItem('show_minicart');
   }
 

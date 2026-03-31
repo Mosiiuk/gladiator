@@ -252,7 +252,7 @@ $upload_dir = wp_get_upload_dir();
 
                   </div>
 
-                  <button type="button" class="btn-main" id="money_prod_buy" data-prod_id="<?php the_ID(); ?>">Buy now</button>
+                  <button class="btn-main" id="money_prod_buy" data-prod_id="<?php the_ID(); ?>">Buy now</button>
                 </div>
 
               </div>
