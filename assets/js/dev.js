@@ -1262,9 +1262,9 @@ const modal = document.getElementById('videoModal');
 const closeBtn = document.getElementById('closeVideo');
 const iframe = document.getElementById('videoFrame');
 
-openBtn.addEventListener('click', () => {
-  const videoUrl = openBtn.getAttribute('data-video');
+const videoUrl = "https://www.youtube.com/embed/nwM_dbpK8w4?autoplay=1";
 
+openBtn.addEventListener('click', () => {
   modal.style.display = 'block';
   iframe.src = videoUrl;
 });
