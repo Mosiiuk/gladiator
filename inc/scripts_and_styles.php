@@ -62,9 +62,9 @@ function skripts_and_styles(){
 
     wp_enqueue_script(
         'dev-theme-script',
-        get_template_directory_uri() . '/assets/js/dev.js',
+        get_template_directory_uri() . '/assets/js/dev_cachefix.js',
         array(),
-        filemtime( get_template_directory() . '/assets/js/dev.js' ),
+        filemtime( get_template_directory() . '/assets/js/dev_cachefix.js' ),
         true
     );//in footer
 
