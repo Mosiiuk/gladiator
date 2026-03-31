@@ -1262,21 +1262,27 @@ const modal = document.getElementById('videoModal');
 const closeBtn = document.getElementById('closeVideo');
 const iframe = document.getElementById('videoFrame');
 
-const videoUrl = "https://www.youtube.com/embed/nwM_dbpK8w4?autoplay=1";
+if (openBtn && modal && closeBtn && iframe) {
 
-openBtn.addEventListener('click', () => {
-  modal.style.display = 'block';
-  iframe.src = videoUrl;
-});
+  openBtn.addEventListener('click', () => {
+    const videoUrl = openBtn.getAttribute('data-video');
 
-closeBtn.addEventListener('click', () => {
-  modal.style.display = 'none';
-  iframe.src = '';
-});
+    if (videoUrl) {
+      modal.style.display = 'block';
+      iframe.src = videoUrl;
+    }
+  });
 
-window.addEventListener('click', (e) => {
-  if (e.target === modal) {
+  closeBtn.addEventListener('click', () => {
     modal.style.display = 'none';
     iframe.src = '';
-  }
-});
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+      iframe.src = '';
+    }
+  });
+
+}
