@@ -1709,7 +1709,7 @@ align-items: center;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(30, 56, 104, 1);
   border-radius: 16px;
-  padding: 25px 16px;
+  padding: 25px 16px 18px; 
   flex: 1;
   text-align: left;
   position: relative;
@@ -1742,7 +1742,7 @@ align-items: center;
   line-height: 1.2;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 16px;
+  margin: 0 0 8px;
 }
 .section__intro__mini .contact__item p a, .section__intro__mini .contact__item p strong{
   font-weight: 700;
