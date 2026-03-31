@@ -1493,13 +1493,9 @@ align-items: center;
   cursor: pointer;
   background: url(../../img/info.svg) no-repeat;
   background-size: contain;
-  position: relative;
+  position: unset;
 }
-@media screen and (max-width: 575px) {
-  .info-icon {
-    position: unset;
-  }
-}
+
 .info-tooltip {
   position: absolute;
   width: 150px;
