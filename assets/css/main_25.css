@@ -1512,7 +1512,9 @@ align-items: center;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   z-index: 10;
-  @media screen and (max-width: 575px) {
+}
+@media screen and (max-width: 575px) {
+    .info-tooltip {
     top: 100%;     
     left: 0;      
     transform: translateY(8px); 
@@ -1520,14 +1522,4 @@ align-items: center;
     max-width: none; 
     box-sizing: border-box; 
   }
-}
-.info-tooltip::before {
-  content: '';
-  position: absolute;
-  left: -6px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-width: 6px;
-  border-style: solid;
-  border-color: transparent #fff transparent transparent;
 }
