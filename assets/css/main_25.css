@@ -1667,7 +1667,7 @@ align-items: center;
 
 .contact__grid {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   justify-content: space-between;
 }
 
@@ -1678,7 +1678,10 @@ align-items: center;
   flex: 1;
   text-align: left;
   position: relative;
-  border: 1px solid rgba(27, 51, 103, 1)
+  border: 1px solid rgba(27, 51, 103, 1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  column-gap: 16px;
 }
 
 .contact__item .num {
