@@ -826,6 +826,15 @@ max-width: 200px;
   flex: 133px;
 }
 
+.gold_custom_amount_hint{
+  display: block;
+  margin: 0;
+  padding: 0 40px 14px;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
 .gold_custom_amount{
   display: flex;
   align-items: center;
@@ -1317,6 +1326,9 @@ align-items: center;
   .server_choose_wrap{
     padding-inline: 20px;
   }
+  .gold_custom_amount_hint{
+    padding-inline: 20px;
+  }
   .gold_custom_amount{
     margin-inline: 20px;
   }
@@ -1340,6 +1352,10 @@ align-items: center;
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
+  }
+  .gold_custom_amount_hint{
+    font-size: 14px;
+    line-height: 20px;
   }
   .gold_custom_amount_value input{
     max-width: 60px;
@@ -1667,41 +1683,22 @@ align-items: center;
 
 .contact__grid {
   display: flex;
-  gap: 24px;
+  gap: 20px;
   justify-content: space-between;
 }
 
 .contact__item {
-  background: rgba(24, 17, 60, 0.5);
-  border-radius: 16px;
-  padding: 25px 16px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 20px;
   flex: 1;
   text-align: left;
   position: relative;
-  border: 1px solid rgba(27, 51, 103, 1);
-  backdrop-filter: blur(10px);
-  display: flex;
-  column-gap: 16px;
 }
-.contact__item h3 {
-  color: #098CEC;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 16px;
-  font-size: 20px;
-}
-.contact__item p {
-  color: rgba(255, 255, 255, 0.5);
-  font-weight: 400;
-  line-height: 1.2;
-  font-size: 16px;
-}
-.contact__item p:not(:last-child) {
-  margin-bottom: 8px;
-}
+
 .contact__item .num {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   background: #fff;
   color: #000;
   border-radius: 50%;
@@ -1710,18 +1707,6 @@ align-items: center;
   justify-content: center;
   margin-bottom: 10px;
   font-weight: bold;
-  position: relative;
-}
-.contact__item .num::after {
-  content: "";
-  position: absolute;
-  left: -4px;
-  top: -4px;
-  width: 40px;
-  height: 40px;
-  background: #FFFFFF33;
-  display: inline-block;
-  border-radius: 50%;
 }
 
 /* Modal */
@@ -1735,6 +1720,8 @@ align-items: center;
   height: 100%;
   background: rgba(0,0,0,0.8);
 }
+
+
 
 .video-modal__content {
   position: relative;
