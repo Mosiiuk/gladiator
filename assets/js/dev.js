@@ -217,14 +217,47 @@ jQuery(document).ready(function ($) {
         url: ajaxurl.url,
         data: data,
         success: function (data) {
-          //let obj = jQuery.parseJSON(data);
-          localStorage.setItem('show_minicart', 'true');
-          window.location.reload();
+          refreshMiniCart(true);
         },
       });
 
   });
   //---------------------/money product----------------------------------
+
+  function openMiniCart() {
+    const $cartWrapper = $('.checkout__wrapper');
+
+    if (!$cartWrapper.length) {
+      return;
+    }
+
+    $cartWrapper.stop(true, true).slideDown().addClass('open');
+    $('.btn__cart').addClass('active');
+  }
+
+  function refreshMiniCart(openAfterRefresh) {
+    $.get(window.location.href, function(response) {
+      const $response = $('<div>').append($.parseHTML(response));
+      const minicartHtml = $response.find('#form_minicart').html();
+      const cartCountHtml = $response.find('.btn__cart .b-count').html();
+
+      if (typeof minicartHtml !== 'undefined') {
+        $('#form_minicart').html(minicartHtml);
+      }
+
+      if (typeof cartCountHtml !== 'undefined') {
+        $('.btn__cart .b-count').html(cartCountHtml);
+      }
+
+      if (openAfterRefresh) {
+        openMiniCart();
+      }
+    }).fail(function() {
+      if (openAfterRefresh) {
+        openMiniCart();
+      }
+    });
+  }
 
 
 
@@ -444,7 +477,7 @@ jQuery(document).ready(function ($) {
   });*/
 
   if (localStorage.getItem('show_minicart') === 'true') {
-    $('.btn__cart').click();
+    openMiniCart();
     localStorage.removeItem('show_minicart');
   }
 
