@@ -1196,39 +1196,10 @@ document.addEventListener("DOMContentLoaded", function () {
       checkScroll();
     }
   }
-//2026//////////////////////////////////////////////////////////////////
-// FIXED BUY BTN ORDER
-// function isInViewport($element) {
-//   if (!$element.length) return false;
-
-//   const rect = $element[0].getBoundingClientRect();
-//   return (
-//     rect.top >= 0 &&
-//     rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-//   );
-// }
-
-// function checkCartButton() {
-//   if ($(window).width() > 991) return;
-
-//   const $target = $('.cart_options_item .woocommerce-variation-add-to-cart .buttons');
-
-//   if (!$target.length) return;
-
-//   if (!isInViewport($target)) {
-//     $('body').addClass('is-fixed-cart');
-//   } else {
-//     $('body').removeClass('is-fixed-cart');
-//   }
-// }
-
-// $(window).on('scroll', checkCartButton);
-// $(window).on('resize', checkCartButton);
-
-// checkCartButton();
-
 
 });
+
+//2026//////////////////////////////////////////////////////////////////
 
 // FIXED BUY BTN ORDER (vanilla JS)
 
@@ -1262,3 +1233,5 @@ window.addEventListener('resize', checkCartButton);
 
 // initial check
 document.addEventListener('DOMContentLoaded', checkCartButton);
+
+//

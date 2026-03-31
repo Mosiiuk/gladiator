@@ -1472,3 +1472,57 @@ align-items: center;
 .woocommerce-variation-add-to-cart .found_cheaper {
   color:  #098cec;
 } 
+.balance__label-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    position: relative;
+  }
+
+.info-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: url(/src/assets/img/info.svg) no-repeat;
+  position: relative;
+  @media screen and (max-width: 575px) {
+    position: unset;
+  }
+}
+.info-tooltip {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 10px);
+  transform: translateY(-50%);
+  width: 260px;
+  background: #fff;
+  color: #000000;
+  font-size: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  z-index: 10;
+  @media screen and (max-width: 575px) {
+    top: 100%;     
+    left: 0;      
+    transform: translateY(8px); 
+    width: 100%; 
+    max-width: none; 
+    box-sizing: border-box; 
+  }
+}
+.info-tooltip::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent #fff transparent transparent;
+}
