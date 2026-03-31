@@ -463,7 +463,7 @@ $upload_dir = wp_get_upload_dir();
            
             <div class="advantages_section">
 
-              <h2 class="advantages_title">What Happens After Order</h2>
+              <h3 class="advantages_title">What Happens After Order</h3>
 
               <div class="advantages_item_wrap d-flex">
                 <?php
