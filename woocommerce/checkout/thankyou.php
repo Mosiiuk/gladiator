@@ -110,7 +110,7 @@ defined( 'ABSPATH' ) || exit;
 			 <span>Watch Video</span>
 			</button>
 
-			<h2>How to contact us</h2>
+			<h3 class="how-to-contacts__title">How to contact us</h3>
 
 			<div class="contact__grid">
 			
