@@ -226,13 +226,22 @@ jQuery(document).ready(function ($) {
 
   function openMiniCart() {
     const $cartWrapper = $('.checkout__wrapper');
+    const $cartButton = $('.btn__cart');
 
     if (!$cartWrapper.length) {
       return;
     }
 
-    $cartWrapper.stop(true, true).slideDown().addClass('open');
-    $('.btn__cart').addClass('active');
+    $cartWrapper
+      .stop(true, true)
+      .css({
+        display: 'block',
+        zIndex: 30,
+      })
+      .slideDown()
+      .addClass('open');
+
+    $cartButton.addClass('active');
   }
 
   function refreshMiniCart(openAfterRefresh) {
