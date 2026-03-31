@@ -94,7 +94,7 @@ defined( 'ABSPATH' ) || exit;
 			</ul>
 
            <!--NEW HTML CODE-->
-		   <p class=""></p>
+		   <p class="order__successfull-text"></p>
 
 
 

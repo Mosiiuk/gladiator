@@ -1608,9 +1608,10 @@ align-items: center;
   font-size: 56px;
   font-weight: 600;
   line-height: 1.1;
+  color: #FFFFFF !important;
 }
 .order__successfull-title-styles strong {
-  color: #098CEC;
+  color: #098CEC !important;
 }
 @media screen and (max-width: 1279px) {
  .order__successfull-title-styles {
@@ -1626,6 +1627,12 @@ align-items: center;
  .order__successfull-title-styles {
    font-size: 26px;
  }
+}
+.order__successfull-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 32px;
+  color: #FFFFFF;
 }
 .order__successfull-logo {
   width: 92px;
