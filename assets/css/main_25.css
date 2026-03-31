@@ -826,15 +826,6 @@ max-width: 200px;
   flex: 133px;
 }
 
-.gold_custom_amount_hint{
-  display: block;
-  margin: 0;
-  padding: 0 40px 14px;
-  font-size: 16px;
-  line-height: 24px;
-  color: rgba(255, 255, 255, 0.72);
-}
-
 .gold_custom_amount{
   display: flex;
   align-items: center;
@@ -1326,9 +1317,6 @@ align-items: center;
   .server_choose_wrap{
     padding-inline: 20px;
   }
-  .gold_custom_amount_hint{
-    padding-inline: 20px;
-  }
   .gold_custom_amount{
     margin-inline: 20px;
   }
@@ -1352,10 +1340,6 @@ align-items: center;
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
-  }
-  .gold_custom_amount_hint{
-    font-size: 14px;
-    line-height: 20px;
   }
   .gold_custom_amount_value input{
     max-width: 60px;
@@ -1650,6 +1634,8 @@ align-items: center;
   margin-top: 20px;
   font-size: 32px;
   color: #FFFFFF;
+  width: 1061px;
+  max-width: 100%;
 }
   @media screen and (max-width: 1279px) {
  .order__successfull-text {
@@ -1665,4 +1651,77 @@ align-items: center;
 .order__successfull-logo {
   width: 92px;
   height: auto;
+}
+
+
+
+.watch-btn {
+  padding: 12px 25px;
+  background: transparent;
+  border: 1px solid #4da3ff;
+  color: #4da3ff;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.contact__grid {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.contact__item {
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 20px;
+  flex: 1;
+  text-align: left;
+  position: relative;
+}
+
+.contact__item .num {
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Modal */
+.video-modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+}
+
+.video-modal__content {
+  position: relative;
+  width: 80%;
+  max-width: 800px;
+  margin: 100px auto;
+}
+
+.video-modal iframe {
+  width: 100%;
+  height: 450px;
+  border-radius: 10px;
+}
+
+.close {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  font-size: 30px;
+  cursor: pointer;
 }
