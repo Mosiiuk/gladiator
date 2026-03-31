@@ -58,11 +58,11 @@ defined( 'ABSPATH' ) || exit;
 
 			</div>
 
-			<h2 class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', esc_html__( 'Order Successful!', 'woocommerce' ), $order ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
+			<h2 class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received order__successfull-title-styles"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', esc_html__( 'Order Successful!', 'woocommerce' ), $order ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
 
 			<ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
 
-				<li class="woocommerce-order-overview__order order">
+				<li class="woocommerce-order-overview__order order order__successfull-title-styles">
 					<?php esc_html_e( 'Your order number is ', 'woocommerce' ); ?>
 					<strong><?php echo $order->get_order_number(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
 				</li>
