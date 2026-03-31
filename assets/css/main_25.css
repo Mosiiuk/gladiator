@@ -1501,9 +1501,6 @@ align-items: center;
 }
 .info-tooltip {
   position: absolute;
-  top: 50%;
-  left: calc(100% + 10px);
-  transform: translateY(-50%);
   width: 260px;
   background: #FFFFFF;
   color: #121212;
@@ -1512,6 +1509,12 @@ align-items: center;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   z-index: 10;
+  top: 100%;     
+  left: 0;      
+  transform: translateY(8px); 
+  max-width: 100%; 
+  box-sizing: border-box; 
+  z-index: 3;
 }
 @media screen and (max-width: 575px) {
     .info-tooltip {
@@ -1522,4 +1525,7 @@ align-items: center;
     max-width: none; 
     box-sizing: border-box; 
   }
+}
+.profile__blocks-wrapper .profile__block-item:nth-child(1) {
+  z-index: 2;
 }
