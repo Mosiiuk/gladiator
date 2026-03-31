@@ -467,7 +467,7 @@ $upload_dir = wp_get_upload_dir();
 
               <div class="advantages_item_wrap d-flex">
                 <div class="advantage_item">
-                    
+                    <img src="im" alt="">
                 </div>
 
               </div>
