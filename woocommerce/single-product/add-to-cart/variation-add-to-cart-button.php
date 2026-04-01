@@ -74,7 +74,7 @@ global $product;
       <path d="M12 7L12 6" stroke="white" stroke-linecap="square"/>
     </svg>
 
-    <?php _e('What happens after order?', 'gladiator'); ?>
+    <?php _e('Our Guarantees?', 'gladiator'); ?>
   </button>
 
     <input type="hidden" name="add-to-cart" value="<?php echo absint( $product->get_id() ); ?>" />
