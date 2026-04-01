@@ -1694,7 +1694,7 @@ align-items: center;
   transition: color ease 0.3s;
 }
 .watch-btn:hover {
-  
+  color: #098CEC;
 }
 .watch-btn svg {
   width: 24px;
