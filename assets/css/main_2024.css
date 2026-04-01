@@ -8358,6 +8358,34 @@ header .container-xxl {
     color: var(--white)
 }
 
+.product__details {
+    margin-top: 8px
+}
+
+.product__detail {
+    line-height: 1.4;
+    font-size: 14px;
+    color: rgba(255, 255, 255, .72)
+}
+
+.product__detail+.product__detail {
+    margin-top: 4px
+}
+
+.product__detail-label {
+    color: var(--white);
+    font-weight: 500
+}
+
+.checkout__wrapper .woocommerce-cart-form__contents .product__details {
+    margin-right: 16px;
+    margin-left: 16px
+}
+
+.checkout__wrapper .woocommerce-cart-form__contents .product__detail {
+    font-size: 12px
+}
+
 .shop_table td {
     font-weight: 400;
     color: var(--white)

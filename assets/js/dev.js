@@ -184,7 +184,45 @@ jQuery(document).ready(function ($) {
     radios.eq(nextIndex).prop("checked", true).trigger("change");
   });
 
+  function setMoneyProductBuyState(state) {
+    const $button = $('#money_prod_buy');
+
+    if (!$button.length) {
+      return;
+    }
+
+    if (!$button.data('default-label')) {
+      $button.data('default-label', $.trim($button.text()));
+    }
+
+    const defaultLabel = $button.data('default-label');
+    let nextLabel = defaultLabel;
+    let isBusy = false;
+
+    if (state === 'processing') {
+      nextLabel = 'Processing...';
+      isBusy = true;
+    } else if (state === 'added') {
+      nextLabel = 'Added to cart';
+      isBusy = false;
+    }
+
+    $button
+      .text(nextLabel)
+      .prop('disabled', isBusy)
+      .toggleClass('is-loading', isBusy)
+      .attr('aria-busy', isBusy ? 'true' : 'false')
+      .css({
+        opacity: isBusy ? '0.7' : '',
+        cursor: isBusy ? 'wait' : '',
+      });
+  }
+
   $('#money_prod_buy').click(function(){
+      if ($(this).prop('disabled')) {
+        return false;
+      }
+
       let prod_id = $(this).data('prod_id');
       let money_qtn = parseInt($('#gold_custom_amount_value').val());
       let server = $('input[name="server"]:checked').val();
@@ -216,8 +254,21 @@ jQuery(document).ready(function ($) {
         type: "POST",
         url: ajaxurl.url,
         data: data,
+        beforeSend: function() {
+          setMoneyProductBuyState('processing');
+        },
         success: function (data) {
-          refreshMiniCart(true);
+          refreshMiniCart(true, function() {
+            setMoneyProductBuyState('added');
+
+            setTimeout(function() {
+              setMoneyProductBuyState('default');
+            }, 1200);
+          });
+        },
+        error: function() {
+          setMoneyProductBuyState('default');
+          alert('Something went wrong. Please try again.');
         },
       });
 
@@ -244,7 +295,7 @@ jQuery(document).ready(function ($) {
     $cartButton.addClass('active');
   }
 
-  function refreshMiniCart(openAfterRefresh) {
+  function refreshMiniCart(openAfterRefresh, onComplete) {
     $.get(window.location.href, function(response) {
       const $response = $('<div>').append($.parseHTML(response));
       const minicartHtml = $response.find('#form_minicart').html();
@@ -261,9 +312,17 @@ jQuery(document).ready(function ($) {
       if (openAfterRefresh) {
         openMiniCart();
       }
+
+      if (typeof onComplete === 'function') {
+        onComplete();
+      }
     }).fail(function() {
       if (openAfterRefresh) {
         openMiniCart();
+      }
+
+      if (typeof onComplete === 'function') {
+        onComplete();
       }
     });
   }

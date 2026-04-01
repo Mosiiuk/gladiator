@@ -69,35 +69,7 @@ $checkout = new WC_Checkout();
 
 											<td class="product-name" data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>">
 												<div class="product__title js-product-title"><?php echo $_product->get_name() ?></div>
-												<div class="product__option">Rating 
-
-												<?php
-
-												$cart_item['addons']; // Addon options
-													$is_rating = false;
-
-													if(isset($cart_item['variation']) and isset($cart_item['variation']['attribute_pa_current-rating'])){
-														echo $cart_item['variation']['attribute_pa_current-rating'];
-														$is_rating = true;
-													}
-													if(isset($cart_item['variation']) and isset($cart_item['variation']['attribute_pa_desired-rating'])){
-														echo '/'.$cart_item['variation']['attribute_pa_desired-rating'];
-														$is_rating = true;
-													}
-
-													if(isset($cart_item['addons']) and is_array($cart_item['addons'])){
-														if($is_rating){
-															echo ' | ';
-														}
-														foreach($cart_item['addons'] as $key => $addon){
-															if($key != 0 or !$is_rating){
-																echo ' | ';
-															}
-															echo $addon['value'];
-														}
-													}
-													?>
-												</div>
+												<?php echo gladiator_render_cart_item_details( $cart_item ); ?>
 												<?php
 
 												do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );

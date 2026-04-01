@@ -99,6 +99,148 @@ function coupon_code_product_add_to_cart($cart_item_data, $product_id, $variatio
     return $cart_item_data;
 }
 
+function gladiator_get_cart_item_custom_value( $cart_item, $keys ) {
+	foreach ( $keys as $key ) {
+		if ( isset( $cart_item[ $key ] ) && $cart_item[ $key ] !== '' ) {
+			return $cart_item[ $key ];
+		}
+
+		if ( isset( $cart_item['custom_data'][ $key ] ) && $cart_item['custom_data'][ $key ] !== '' ) {
+			return $cart_item['custom_data'][ $key ];
+		}
+	}
+
+	return '';
+}
+
+function gladiator_format_cart_item_detail_value( $value, $taxonomy = '' ) {
+	if ( is_array( $value ) ) {
+		$value = implode( ', ', array_filter( array_map( 'gladiator_format_cart_item_detail_value', $value ) ) );
+	}
+
+	$value = trim( wp_strip_all_tags( (string) $value ) );
+
+	if ( $value === '' ) {
+		return '';
+	}
+
+	if ( $taxonomy && taxonomy_exists( $taxonomy ) ) {
+		$term = get_term_by( 'slug', $value, $taxonomy );
+
+		if ( $term && ! is_wp_error( $term ) ) {
+			return $term->name;
+		}
+	}
+
+	if ( strpos( $value, ' ' ) === false && ( strpos( $value, '-' ) !== false || strpos( $value, '_' ) !== false ) ) {
+		return ucwords( str_replace( array( '-', '_' ), ' ', $value ) );
+	}
+
+	return $value;
+}
+
+function gladiator_get_cart_item_details( $cart_item ) {
+	$details = array();
+	$seen    = array();
+
+	$append_detail = function( $label, $value ) use ( &$details, &$seen ) {
+		$label = trim( wp_strip_all_tags( (string) $label ) );
+		$value = gladiator_format_cart_item_detail_value( $value );
+
+		if ( $label === '' || $value === '' ) {
+			return;
+		}
+
+		$detail_key = strtolower( $label . '|' . $value );
+
+		if ( isset( $seen[ $detail_key ] ) ) {
+			return;
+		}
+
+		$details[]          = array(
+			'label' => $label,
+			'value' => $value,
+		);
+		$seen[ $detail_key ] = true;
+	};
+
+	if ( ! empty( $cart_item['variation'] ) && is_array( $cart_item['variation'] ) ) {
+		foreach ( $cart_item['variation'] as $attribute_name => $attribute_value ) {
+			if ( $attribute_value === '' ) {
+				continue;
+			}
+
+			$taxonomy = str_replace( 'attribute_', '', $attribute_name );
+			$label    = wc_attribute_label( $taxonomy );
+			$value    = gladiator_format_cart_item_detail_value( $attribute_value, $taxonomy );
+
+			$append_detail( $label, $value );
+		}
+	}
+
+	if ( ! empty( $cart_item['addons'] ) && is_array( $cart_item['addons'] ) ) {
+		foreach ( $cart_item['addons'] as $addon ) {
+			if ( empty( $addon['value'] ) ) {
+				continue;
+			}
+
+			$label = ! empty( $addon['name'] ) ? $addon['name'] : __( 'Option', 'gladiator-theme' );
+			$append_detail( $label, $addon['value'] );
+		}
+	}
+
+	$server = gladiator_get_cart_item_custom_value(
+		$cart_item,
+		array( 'server', 'money_server', 'server_name', 'selected_server' )
+	);
+
+	if ( $server !== '' ) {
+		$append_detail( __( 'Server', 'gladiator-theme' ), $server );
+	}
+
+	$amount = gladiator_get_cart_item_custom_value(
+		$cart_item,
+		array( 'money_qtn', 'money_amount', 'custom_amount', 'amount' )
+	);
+
+	if ( $amount !== '' ) {
+		$unit = gladiator_get_cart_item_custom_value(
+			$cart_item,
+			array( 'unit', 'money_unit' )
+		);
+
+		if ( $unit !== '' && stripos( (string) $amount, (string) $unit ) === false ) {
+			$amount .= ' ' . $unit;
+		}
+
+		$append_detail( __( 'Amount', 'gladiator-theme' ), $amount );
+	}
+
+	return $details;
+}
+
+function gladiator_render_cart_item_details( $cart_item ) {
+	$details = gladiator_get_cart_item_details( $cart_item );
+
+	if ( empty( $details ) ) {
+		return '';
+	}
+
+	ob_start();
+	?>
+	<div class="product__details">
+		<?php foreach ( $details as $detail ) : ?>
+			<div class="product__detail">
+				<span class="product__detail-label"><?php echo esc_html( $detail['label'] ); ?>:</span>
+				<span class="product__detail-value"><?php echo esc_html( $detail['value'] ); ?></span>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<?php
+
+	return ob_get_clean();
+}
+
 //----- DELETE ORDERS >24h OnHold status ----
 add_action( 'init', 'del_orders24h' );
 function del_orders24h()
@@ -131,4 +273,3 @@ function del_orders24h()
         exit;
     }
 }
-

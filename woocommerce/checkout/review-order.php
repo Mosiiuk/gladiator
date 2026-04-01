@@ -32,16 +32,7 @@ defined( 'ABSPATH' ) || exit;
 					<tr class="<?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
 						<td class="product-name">
 							<div class="product__title js-product-title"><?php echo apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ); ?></div>
-							<div class="product__option">Rating 
-								<?php
-								if(isset($cart_item['variation']) and isset($cart_item['variation']['attribute_pa_current-rating'])){
-									echo $cart_item['variation']['attribute_pa_current-rating'];
-								}
-								if(isset($cart_item['variation']) and isset($cart_item['variation']['attribute_pa_desired-rating'])){
-									echo '/'.$cart_item['variation']['attribute_pa_desired-rating'];
-								}
-								?>
-							</div>
+							<?php echo gladiator_render_cart_item_details( $cart_item ); ?>
 						</td>
 						<td>
 							<div class="quantity__val"><?php echo $cart_item['quantity']; ?></div>

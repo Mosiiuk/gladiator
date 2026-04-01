@@ -44,6 +44,7 @@ if (class_exists('WooCommerce')) {
                     <td class=\"product-name\" data-title=\"Product\">
                         <div class=\"product__title js-product-title\">
                             ".$product->get_name()."                                                                                                        </div>
+                        ".gladiator_render_cart_item_details( $cart_item )."
                     </td>
                     <td class=\"product__price\">
                         <div>".wc_price($cart_item['line_subtotal'])." </div>
