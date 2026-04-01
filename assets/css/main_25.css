@@ -1719,7 +1719,7 @@ align-items: center;
 @media screen and (max-width: 1279px) {
  .contact__item {
    flex-direction: column;
-   row-gap: 8px;
+   row-gap: 16px;
  }
 }
 @media screen and (max-width: 991px) {
@@ -1819,11 +1819,6 @@ align-items: center;
    font-size: 24px;
  }
 }
-@media screen and (max-width: 767px) {
- .section__intro__mini h3.how-to-contacts__title {
-   font-size: 20px;
- }
-}
 .order-successfull__check-block {
   display: flex;
   align-items: center;
@@ -1864,4 +1859,7 @@ align-items: center;
   background: url(../../img/order-check-icon.svg) no-repeat;
   background-size: contain;
   transform: translateY(-50%);
+}
+.order__successfull.section__intro__mini {
+  padding-bottom: 0;
 }
