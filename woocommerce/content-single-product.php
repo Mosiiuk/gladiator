@@ -595,7 +595,7 @@ $upload_dir = wp_get_upload_dir();
       </button>
       <div class="modal-header">
         <h5 class="modal-title" id="found_cheaperTitle">
-					<?php _e( 'Our Guarantees', 'gladiator' ); ?>
+					<?php _e( 'What happens after order?', 'gladiator' ); ?>
         </h5>
       </div>
       <div class="modal-body">
