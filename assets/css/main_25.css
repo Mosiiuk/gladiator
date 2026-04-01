@@ -1658,12 +1658,12 @@ align-items: center;
   margin: 20px auto 30px;  
 }
 @media screen and (max-width: 1279px) {
- .order__successfull-text p.order__successfull-text  {
+ .section__intro__mini p.order__successfull-text {
    font-size: 24px;
  }
 }
 @media screen and (max-width: 767px) {
- .order__successfull-text p.order__successfull-text {
+ .section__intro__mini p.order__successfull-text  {
    font-size: 20px;
  }
 }
@@ -1691,6 +1691,10 @@ align-items: center;
   font-weight: 400;
   text-transform: uppercase;
   margin-inline: auto;
+  transition: color ease 0.3s;
+}
+.watch-btn:hover {
+  
 }
 .watch-btn svg {
   width: 24px;
