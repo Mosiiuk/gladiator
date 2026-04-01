@@ -1621,6 +1621,7 @@ align-items: center;
 .order__successfull {
   background: url(../../img/hero-bg.png) no-repeat;
   background-size: cover;
+  background-position: top;
 }
 .order__successfull-title-styles, .woocommerce-order.container.section__intro__mini h2.order__successfull-title-styles {
   text-align: center;
