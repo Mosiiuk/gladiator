@@ -477,6 +477,7 @@ $upload_dir = wp_get_upload_dir();
 
               </div>
             </div>
+            <!--new section -->
            
             <ul class="rating__body">
 							<?php if ( get_field( 'description_text' ) ) { ?>
