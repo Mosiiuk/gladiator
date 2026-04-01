@@ -1551,6 +1551,9 @@ align-items: center;
   body.is-fixed-cart .section__intro__mini .col-lg-9 {
     z-index: -1;
   }
+  body.is-fixed-cart .footer {
+    z-index: 6;
+  }
   .buttons .add_to_cart {
     transition: none;
   }
