@@ -139,40 +139,12 @@ function gladiator_format_cart_item_detail_value( $value, $taxonomy = '' ) {
 	return $value;
 }
 
-function gladiator_format_cart_item_detail_label( $label ) {
-	$label = trim( wp_strip_all_tags( (string) $label ) );
-
-	if ( $label === '' ) {
-		return '';
-	}
-
-	if ( strpos( $label, ' ' ) === false && ( strpos( $label, '-' ) !== false || strpos( $label, '_' ) !== false ) ) {
-		return ucwords( str_replace( array( '-', '_' ), ' ', $label ) );
-	}
-
-	return $label;
-}
-
-function gladiator_get_cart_item_detail_value_from_data( $detail ) {
-	if ( ! is_array( $detail ) ) {
-		return $detail;
-	}
-
-	foreach ( array( 'display', 'display_value', 'value' ) as $value_key ) {
-		if ( isset( $detail[ $value_key ] ) && $detail[ $value_key ] !== '' && $detail[ $value_key ] !== array() ) {
-			return $detail[ $value_key ];
-		}
-	}
-
-	return '';
-}
-
 function gladiator_get_cart_item_details( $cart_item ) {
 	$details = array();
 	$seen    = array();
 
 	$append_detail = function( $label, $value ) use ( &$details, &$seen ) {
-		$label = gladiator_format_cart_item_detail_label( $label );
+		$label = trim( wp_strip_all_tags( (string) $label ) );
 		$value = gladiator_format_cart_item_detail_value( $value );
 
 		if ( $label === '' || $value === '' ) {
@@ -206,87 +178,14 @@ function gladiator_get_cart_item_details( $cart_item ) {
 		}
 	}
 
-	$item_data = apply_filters( 'woocommerce_get_item_data', array(), $cart_item );
-
-	if ( ! empty( $item_data ) && is_array( $item_data ) ) {
-		foreach ( $item_data as $item_detail ) {
-			if ( ! empty( $item_detail['hidden'] ) ) {
-				continue;
-			}
-
-			$label = '';
-
-			if ( ! empty( $item_detail['key'] ) ) {
-				$label = $item_detail['key'];
-			} elseif ( ! empty( $item_detail['name'] ) ) {
-				$label = $item_detail['name'];
-			}
-
-			$value = gladiator_get_cart_item_detail_value_from_data( $item_detail );
-
-			$append_detail( $label, $value );
-		}
-	}
-
 	if ( ! empty( $cart_item['addons'] ) && is_array( $cart_item['addons'] ) ) {
 		foreach ( $cart_item['addons'] as $addon ) {
-			$value = gladiator_get_cart_item_detail_value_from_data( $addon );
-
-			if ( $value === '' ) {
+			if ( empty( $addon['value'] ) ) {
 				continue;
 			}
 
-			$label = ! empty( $addon['name'] ) ? $addon['name'] : '';
-
-			if ( $label === '' && ! empty( $addon['field_name'] ) ) {
-				$label = $addon['field_name'];
-			}
-
-			if ( $label === '' ) {
-				$label = __( 'Option', 'gladiator-theme' );
-			}
-
-			$append_detail( $label, $value );
-		}
-	}
-
-	if ( ! empty( $cart_item['custom_data'] ) && is_array( $cart_item['custom_data'] ) ) {
-		$ignored_custom_keys = array(
-			'server',
-			'money_server',
-			'server_name',
-			'selected_server',
-			'money_qtn',
-			'money_amount',
-			'custom_amount',
-			'amount',
-			'unit',
-			'money_unit',
-		);
-
-		foreach ( $cart_item['custom_data'] as $custom_key => $custom_value ) {
-			if ( in_array( $custom_key, $ignored_custom_keys, true ) ) {
-				continue;
-			}
-
-			$label = $custom_key;
-			$value = $custom_value;
-
-			if ( is_array( $custom_value ) ) {
-				if ( ! empty( $custom_value['label'] ) ) {
-					$label = $custom_value['label'];
-				} elseif ( ! empty( $custom_value['key'] ) ) {
-					$label = $custom_value['key'];
-				}
-
-				$value = gladiator_get_cart_item_detail_value_from_data( $custom_value );
-
-				if ( $value === '' ) {
-					$value = $custom_value;
-				}
-			}
-
-			$append_detail( $label, $value );
+			$label = ! empty( $addon['name'] ) ? $addon['name'] : __( 'Option', 'gladiator-theme' );
+			$append_detail( $label, $addon['value'] );
 		}
 	}
 

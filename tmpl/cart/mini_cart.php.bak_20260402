@@ -101,7 +101,7 @@ if (class_exists('WooCommerce')) {
 
   <div class="site_balance_checkout_wrap">
     <p>
-      Have store credit? Apply it here!
+      Use your site balance to pay
     </p>
 
 
