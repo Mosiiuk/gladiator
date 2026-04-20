@@ -75,7 +75,13 @@ function skripts_and_styles(){
     );//in footer
 
     wp_enqueue_script('spincrement-script', get_template_directory_uri() . '/assets/js/jquery.spincrement.min.js', array(), '1.0', true );
-    wp_enqueue_script('main-theme-script', get_template_directory_uri() . '/assets/js/main_new.js', array(), '2.1', true );
+    wp_enqueue_script(
+        'main-theme-script',
+        get_template_directory_uri() . '/assets/js/main_new.js',
+        array(),
+        filemtime( get_template_directory() . '/assets/js/main_new.js' ),
+        true
+    );
 
 
     //-------- reCAPTCHA -----

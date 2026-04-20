@@ -355,41 +355,9 @@ jQuery(document).ready(function ($) {
   };
 
   let homeSearchTimer = null;
-  const $homeSearchWrap = $(".search_home_wrap");
-  const $homeSearchInput = $("#home_search_ext");
-  const $homeSearchResult = $("#home_search_ext_result");
 
-  const toggleHomeSearchResults = (isOpen, clearMarkup = false) => {
-    $homeSearchWrap.toggleClass("is-open", isOpen);
-    $homeSearchInput.attr("aria-expanded", isOpen ? "true" : "false");
-
-    if (isOpen) {
-      $homeSearchResult.show();
-      return;
-    }
-
-    $homeSearchWrap.removeClass("is-loading");
-    $homeSearchResult.hide();
-
-    if (clearMarkup) {
-      $homeSearchResult.empty();
-    }
-  };
-
-  $homeSearchInput.on("focus", function () {
-    if ($.trim($(this).val()).length >= 2 && $.trim($homeSearchResult.html()).length) {
-      toggleHomeSearchResults(true);
-    }
-  });
-
-  $homeSearchInput.on("keyup", function(event) {
+  $("#home_search_ext").on("keyup", function(event) {
       const value = $.trim($(this).val());
-
-      if (event.key === "Escape") {
-        clearTimeout(homeSearchTimer);
-        toggleHomeSearchResults(false, true);
-        return;
-      }
 
       if (event.key === "Enter") {
         return;
@@ -398,7 +366,7 @@ jQuery(document).ready(function ($) {
       clearTimeout(homeSearchTimer);
 
       if (value.length < 2) {
-        toggleHomeSearchResults(false, true);
+        $('#home_search_ext_result').hide().empty();
         return;
       }
 
@@ -410,36 +378,15 @@ jQuery(document).ready(function ($) {
             action:'home_search_ext',
             game_name:value,
           },
-          beforeSend: function () {
-            $homeSearchWrap.addClass("is-loading");
-          },
           success: function (data) {
             let obj = jQuery.parseJSON(data);
 
-            if ($.trim($homeSearchInput.val()) !== value) {
-              return;
-            }
-
-            $homeSearchWrap.removeClass("is-loading");
-            $homeSearchResult.html(obj.html);
-            toggleHomeSearchResults($.trim(obj.html).length > 0);
-          },
-          error: function () {
-            toggleHomeSearchResults(false, true);
+            $('#home_search_ext_result').show();
+            $('#home_search_ext_result').html(obj.html);
           },
         });
       }, 200);
 
-  });
-
-  $(document).on("click", function (event) {
-    if (!$(event.target).closest(".search_home_wrap").length) {
-      toggleHomeSearchResults(false);
-    }
-  });
-
-  $(document).on("click", "#home_search_ext_result a", function () {
-    toggleHomeSearchResults(false);
   });
 
   $("#header_search_game").on("keyup", function() {
@@ -461,79 +408,21 @@ jQuery(document).ready(function ($) {
   });
 
 
-  const $homeGames = $(".home_all_list_game");
+  let itemsToShow = 10;
+  let totalItems = $(".home_all_list_game").length;
 
-  if ($homeGames.length) {
-    const gamesPerPage = 10;
-    const $homeGamesGrid = $(".hero__games--browse");
-    const $homeGamesEmptyState = $("#home_all_list_game_empty");
-    const $homeGamesShowMore = $("#home_all_list_game_btn");
-    const $homeGamesFilters = $(".hero__games-filter");
-    const defaultOrder = $homeGames
-      .toArray()
-      .sort((left, right) => Number($(left).data("defaultIndex")) - Number($(right).data("defaultIndex")));
-    const alphabeticalOrder = [...defaultOrder].sort((left, right) => {
-      const leftTitle = String($(left).data("gameTitle") || "");
-      const rightTitle = String($(right).data("gameTitle") || "");
+  $(".home_all_list_game").hide();
+  $(".home_all_list_game:lt(" + itemsToShow + ")").show();
 
-      return leftTitle.localeCompare(rightTitle, undefined, {
-        numeric: true,
-        sensitivity: "base",
-      });
-    });
+  $('#home_all_list_game_btn').click(function(e) {
+    e.preventDefault();
+    itemsToShow += 10;
+    $(".home_all_list_game:lt(" + itemsToShow + ")").fadeIn();
 
-    let activeHomeGamesFilter = "default";
-    let visibleHomeGamesCount = gamesPerPage;
-
-    function getOrderedHomeGames() {
-      return activeHomeGamesFilter === "a-z" ? alphabeticalOrder : defaultOrder;
+    if (itemsToShow >= totalItems) {
+      $(this).hide();
     }
-
-    function getFilteredHomeGames() {
-      const orderedGames = getOrderedHomeGames();
-
-      if (activeHomeGamesFilter === "default" || activeHomeGamesFilter === "a-z") {
-        return orderedGames;
-      }
-
-      return orderedGames.filter((item) => $(item).data("gameSortGroup") === activeHomeGamesFilter);
-    }
-
-    function renderHomeGames() {
-      const filteredGames = getFilteredHomeGames();
-
-      $homeGamesGrid.append(getOrderedHomeGames());
-      $homeGames.hide().attr("aria-hidden", "true");
-
-      if (!filteredGames.length) {
-        $homeGamesEmptyState.prop("hidden", false);
-        $homeGamesShowMore.hide();
-        return;
-      }
-
-      $homeGamesEmptyState.prop("hidden", true);
-      $(filteredGames.slice(0, visibleHomeGamesCount)).show().attr("aria-hidden", "false");
-      $homeGamesShowMore.toggle(filteredGames.length > visibleHomeGamesCount);
-    }
-
-    $homeGamesFilters.on("click", function () {
-      activeHomeGamesFilter = $(this).data("gamesFilter");
-      visibleHomeGamesCount = gamesPerPage;
-
-      $homeGamesFilters.removeClass("is-active").attr("aria-pressed", "false");
-      $(this).addClass("is-active").attr("aria-pressed", "true");
-
-      renderHomeGames();
-    });
-
-    $homeGamesShowMore.on("click", function (e) {
-      e.preventDefault();
-      visibleHomeGamesCount += gamesPerPage;
-      renderHomeGames();
-    });
-
-    renderHomeGames();
-  }
+  });
 
   //----------- /2025 ----
 

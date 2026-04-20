@@ -8,6 +8,154 @@ if( function_exists('acf_add_options_page') ) {
     ) );
 }
 
+if ( function_exists( 'acf_add_local_field_group' ) ) {
+	acf_add_local_field_group(
+		array(
+			'key'    => 'group_gladiator_guarantees_popup',
+			'title'  => 'Guarantees Popup',
+			'fields' => array(
+				array(
+					'key'           => 'field_gladiator_guarantees_popup_title',
+					'label'         => 'Popup Title',
+					'name'          => 'guarantees_popup_title',
+					'type'          => 'text',
+					'default_value' => 'Our Guarantees',
+				),
+				array(
+					'key'          => 'field_gladiator_guarantees_popup_steps',
+					'label'        => 'Popup Steps',
+					'name'         => 'guarantees_popup_steps',
+					'type'         => 'repeater',
+					'layout'       => 'table',
+					'button_label' => 'Add Row',
+					'sub_fields'   => array(
+						array(
+							'key'           => 'field_gladiator_guarantees_popup_step_text',
+							'label'         => 'Text',
+							'name'          => 'text',
+							'type'          => 'textarea',
+							'rows'          => 3,
+							'new_lines'     => 'br',
+							'default_value' => '',
+						),
+					),
+				),
+			),
+			'location' => array(
+				array(
+					array(
+						'param'    => 'options_page',
+						'operator' => '==',
+						'value'    => 'acf-options-game-settings',
+					),
+				),
+			),
+			'menu_order'            => 90,
+			'position'              => 'normal',
+			'style'                 => 'default',
+			'label_placement'       => 'top',
+			'instruction_placement' => 'label',
+			'active'                => true,
+		)
+	);
+}
+
+if ( function_exists( 'acf_add_local_field_group' ) ) {
+	acf_add_local_field_group(
+		array(
+			'key'    => 'group_gladiator_order_success_page',
+			'title'  => 'Order Success Page',
+			'fields' => array(
+				array(
+					'key'           => 'field_gladiator_order_success_title',
+					'label'         => 'Success Title',
+					'name'          => 'order_success_title',
+					'type'          => 'text',
+					'default_value' => 'Order Successful!',
+				),
+				array(
+					'key'           => 'field_gladiator_order_success_order_prefix',
+					'label'         => 'Order Number Prefix',
+					'name'          => 'order_success_order_prefix',
+					'type'          => 'text',
+					'default_value' => 'Your order number is',
+				),
+				array(
+					'key'           => 'field_gladiator_order_success_intro',
+					'label'         => 'Intro Text',
+					'name'          => 'order_success_intro_text',
+					'type'          => 'textarea',
+					'rows'          => 3,
+					'new_lines'     => 'br',
+					'default_value' => 'Please follow the instructions below to contact us on Discord so we can start your order right away.',
+				),
+				array(
+					'key'           => 'field_gladiator_order_success_video_button',
+					'label'         => 'Video Button Text',
+					'name'          => 'order_success_video_button_text',
+					'type'          => 'text',
+					'default_value' => 'Watch Video',
+				),
+				array(
+					'key'           => 'field_gladiator_order_success_video_url',
+					'label'         => 'Video URL',
+					'name'          => 'order_success_video_url',
+					'type'          => 'url',
+					'default_value' => 'https://www.youtube.com/embed/nwM_dbpK8w4?autoplay=1',
+				),
+				array(
+					'key'           => 'field_gladiator_order_success_flow_title',
+					'label'         => 'Flow Title',
+					'name'          => 'order_success_flow_title',
+					'type'          => 'text',
+					'default_value' => 'How to contact us',
+				),
+				array(
+					'key'          => 'field_gladiator_order_success_steps',
+					'label'        => 'Flow Steps',
+					'name'         => 'order_success_steps',
+					'type'         => 'repeater',
+					'layout'       => 'table',
+					'button_label' => 'Add Step',
+					'sub_fields'   => array(
+						array(
+							'key'           => 'field_gladiator_order_success_step_title',
+							'label'         => 'Title',
+							'name'          => 'title',
+							'type'          => 'text',
+							'default_value' => '',
+						),
+						array(
+							'key'           => 'field_gladiator_order_success_step_text',
+							'label'         => 'Text',
+							'name'          => 'text',
+							'type'          => 'textarea',
+							'rows'          => 3,
+							'new_lines'     => 'br',
+							'default_value' => '',
+						),
+					),
+				),
+			),
+			'location' => array(
+				array(
+					array(
+						'param'    => 'options_page',
+						'operator' => '==',
+						'value'    => 'acf-options-game-settings',
+					),
+				),
+			),
+			'menu_order'            => 91,
+			'position'              => 'normal',
+			'style'                 => 'default',
+			'label_placement'       => 'top',
+			'instruction_placement' => 'label',
+			'active'                => true,
+		)
+	);
+}
+
 class Game_Change
 {
     private static $instance;

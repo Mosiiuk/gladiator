@@ -146,8 +146,8 @@
 
                             </div>
                             <div class="header_search">
-                                <form autocomplete="off" role="search" method="get" id="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="search_form">
-                                    <button type="submit" id="searchButton">
+                                <form autocomplete="off" role="search" method="get" id="searchform" action="#" class="search_form">
+                                    <button type="button" id="searchButton">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <circle cx="11" cy="11" r="6" stroke="white"></circle>
                                             <path d="M20 20L17 17" stroke="white" stroke-linecap="round"></path>
@@ -206,7 +206,7 @@
                                 <?php } else { ?>
 
                                     <?php if ($roles==admin_panel_role_name) { ?>
-                                        <div class="user" id="go_to_my_acc" data-url="<?php echo esc_url( wp_logout_url( home_url( '/' ) ) ); ?>">
+                                        <div class="user" id="go_to_my_acc" data-url="<?php echo wp_logout_url(); ?>">
                                             <img src="<?php echo theme_url;?>/img/my-account-mobile.svg" alt="icon">
                                             <div class="my_account">
                                                     <?php echo __('Logout','gladiator-theme');?>
@@ -505,7 +505,7 @@
                 </div>
                 <div class="profile-btn__wrapper">
                     <div class="btn-border">
-                        <a href="<?php echo esc_url( wp_logout_url( home_url( '/' ) ) ); ?>">
+                        <a href="<?php echo wp_logout_url(); ?>">
                             <?php echo __('Logout','gladiator-theme');?>
                         </a>
                     </div>

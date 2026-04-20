@@ -7043,6 +7043,33 @@ header .container-xxl {
     border-bottom: 1px solid hsla(0, 0%, 100%, .1)
 }
 
+.product_mobile_currency {
+    display: none
+}
+
+.single-product .header_acc .header_currency {
+    display: none !important
+}
+
+.single-product .product_mobile_currency {
+    display: flex !important;
+    justify-content: flex-end;
+    margin: 0 0 16px;
+    position: relative;
+    z-index: 2
+}
+
+.single-product .product_mobile_currency .nice-select {
+    min-width: 68px;
+    justify-content: flex-start
+}
+
+@media screen and (max-width:767px) {
+    .single-product .product_mobile_currency {
+        margin: -20px 0 16px
+    }
+}
+
 .btn__cart {
     position: relative;
     cursor: pointer
@@ -8785,6 +8812,45 @@ h1 {
     height: auto
 }
 
+.hero__games-sort {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px
+}
+
+.hero__games-filter {
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: rgba(255, 255, 255, .82);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-family: Outfit-f, sans-serif;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 500;
+    transition: background-color .3s ease, border-color .3s ease, color .3s ease, transform .3s ease
+}
+
+.hero__games-filter:hover {
+    border-color: rgba(9, 140, 236, .48);
+    color: var(--white);
+    transform: translateY(-1px)
+}
+
+.hero__games-filter.is-active,
+.hero__games-filter[aria-pressed=true] {
+    border-color: var(--blue);
+    background: var(--blue);
+    color: var(--white);
+    box-shadow: 0 12px 24px rgba(9, 140, 236, .2)
+}
+
+.hero__games-filter:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 2px
+}
+
 .hero__games {
     display: flex;
     justify-content: flex-start;
@@ -8811,6 +8877,10 @@ h1 {
     .hero__games {
        grid-template-columns: repeat(2, 1fr)
     }
+}
+
+.hero__games--browse {
+    margin-top: 32px
 }
 
 .hero__games-item {
@@ -8960,6 +9030,33 @@ h1 {
     object-fit: contain;
     margin-left: 9px;
     transition: transform .3s ease
+}
+
+.hero__games-empty {
+    margin-bottom: 32px;
+    color: hsla(0, 0%, 100%, .72);
+    font-family: Outfit-f, sans-serif;
+    font-size: 18px;
+    line-height: 1.5
+}
+
+@media screen and (max-width:767px) {
+    .hero__games-sort {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        scrollbar-width: thin
+    }
+
+    .hero__games-filter {
+        flex: 0 0 auto;
+        font-size: 15px;
+        padding: 10px 16px
+    }
+
+    .hero__games-empty {
+        font-size: 16px
+    }
 }
 
 .steps {

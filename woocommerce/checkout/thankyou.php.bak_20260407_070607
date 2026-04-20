@@ -24,8 +24,6 @@ $order_success_video_button_text = get_field( 'order_success_video_button_text',
 $order_success_video_url = get_field( 'order_success_video_url', 'option' );
 $order_success_flow_title = get_field( 'order_success_flow_title', 'option' );
 $order_success_steps = get_field( 'order_success_steps', 'option' );
-$order_success_troubleshooting_title = get_field( 'order_success_troubleshooting_title', 'option' );
-$order_success_troubleshooting_items = get_field( 'order_success_troubleshooting_items', 'option' );
 
 if ( empty( $order_success_title ) ) {
 	$order_success_title = __( 'Order Successful!', 'gladiator' );
@@ -55,34 +53,20 @@ if ( empty( $order_success_steps ) ) {
 	$order_success_steps = array(
 		array(
 			'title' => __( 'Join Our Discord Gateway Server', 'gladiator' ),
-			'text'  => __( 'Link: <a href="https://discord.com/invite/ZVa5Np3kR" target="_blank" rel="noopener noreferrer">discord.gg/ZVa5Np3kR</a><br>This server ONLY allows us to appear in your DMs — nothing else.', 'gladiator' ),
+			'text'  => __( 'Open this invite link: discord.gg/ZVa5Np3kR', 'gladiator' ),
 		),
 		array(
 			'title' => __( 'Open Your Discord Search Bar', 'gladiator' ),
-			'text'  => __( 'Go to: Find or Start a Conversation<br>Type: <strong>gladiatorboost2024</strong>', 'gladiator' ),
+			'text'  => __( 'Go to "Find or Start a Conversation" and search for gladiatorboost2024.', 'gladiator' ),
 		),
 		array(
 			'title' => __( 'Send Us a Direct Message', 'gladiator' ),
-			'text'  => __( 'Click our profile -> Send a DM with your order number<br>This connects you directly to your assigned GladiatorBoost manager.', 'gladiator' ),
+			'text'  => __( 'Open our profile and send a DM with your order number.', 'gladiator' ),
 		),
-	);
-}
-
-if ( ! is_array( $order_success_steps ) ) {
-	$order_success_steps = array();
-}
-
-$order_success_steps = array_values( array_slice( $order_success_steps, 0, 3 ) );
-
-if ( empty( $order_success_troubleshooting_title ) ) {
-	$order_success_troubleshooting_title = __( 'Troubleshooting (if needed)', 'gladiator' );
-}
-
-if ( empty( $order_success_troubleshooting_items ) || ! is_array( $order_success_troubleshooting_items ) ) {
-	$order_success_troubleshooting_items = array(
-		__( 'Try searching @gladiatorboost2024', 'gladiator' ),
-		__( 'Enable: Privacy -> "Allow messages from server members"', 'gladiator' ),
-		__( 'After joining the server, you will see us in your DM list', 'gladiator' ),
+		array(
+			'title' => __( 'Wait For Confirmation', 'gladiator' ),
+			'text'  => __( 'We will reach out quickly and start processing your order.', 'gladiator' ),
+		),
 	);
 }
 ?>
@@ -170,26 +154,12 @@ if ( empty( $order_success_troubleshooting_items ) || ! is_array( $order_success
 									<h3><?php echo esc_html( $step_title ); ?></h3>
 								<?php endif; ?>
 								<?php if ( $step_text ) : ?>
-									<?php if ( strpos( $step_text, '<' ) !== false ) : ?>
-										<p><?php echo wp_kses_post( str_replace( '<br>', '</p><p>', $step_text ) ); ?></p>
-									<?php else : ?>
-										<p><?php echo wp_kses_post( $step_text ); ?></p>
-									<?php endif; ?>
+									<p><?php echo wp_kses_post( $step_text ); ?></p>
 								<?php endif; ?>
 							</div>
 						</div>
 					<?php endforeach; ?>
 				</div>
-
-				<ul class="order-successfull__check-block">
-					<li class="order-successfull__check-block-title"><?php echo esc_html( $order_success_troubleshooting_title ); ?></li>
-					<?php foreach ( $order_success_troubleshooting_items as $troubleshooting_item ) : ?>
-						<?php if ( empty( $troubleshooting_item ) ) : ?>
-							<?php continue; ?>
-						<?php endif; ?>
-						<li><?php echo wp_kses_post( $troubleshooting_item ); ?></li>
-					<?php endforeach; ?>
-				</ul>
 
 				<!-- Modal -->
 				<div class="video-modal" id="videoModal">
@@ -203,8 +173,8 @@ if ( empty( $order_success_troubleshooting_items ) || ! is_array( $order_success
 				</iframe>
 				</div>
 			</div>
-
-            <!-- REDIRECT TO CHAT -->
+													
+	            <!-- REDIRECT TO CHAT -->
             <?php
                 $current_user = wp_get_current_user();
                 $link = '';

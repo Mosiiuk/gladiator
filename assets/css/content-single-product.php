@@ -35,107 +35,6 @@ if ( post_password_required() ) {
 
 $upload_dir = wp_get_upload_dir();
 
-$after_order_steps = array(
-	array(
-		'icon' => 'what-happens-icon-1.svg',
-		'text' => __( 'We contact you on Discord within 5 minutes of ordering', 'gladiator' ),
-	),
-	array(
-		'icon' => 'what-happens-icon-2.svg',
-		'text' => __( 'We confirm all details and start', 'gladiator' ),
-	),
-	array(
-		'icon' => 'what-happens-icon-3.svg',
-		'text' => __( 'After completion, we ask you for a review', 'gladiator' ),
-	),
-	array(
-		'icon' => 'what-happens-icon-4.svg',
-		'text' => __( 'We send you a discount code for next time!', 'gladiator' ),
-	),
-);
-
-$product_advantages = get_field( 'advantages', 'option' );
-
-if ( empty( $product_advantages ) ) {
-	$product_advantages = get_field( 'advantages', 'options' );
-}
-
-$guarantees_popup_title = get_field( 'guarantees_popup_title', 'option' );
-$guarantees_popup_steps = get_field( 'guarantees_popup_steps', 'option' );
-
-if ( empty( $guarantees_popup_title ) ) {
-	$guarantees_popup_title = __( 'Our Guarantees', 'gladiator' );
-}
-
-if ( empty( $guarantees_popup_steps ) ) {
-	$guarantees_popup_steps = array(
-		array(
-			'text' => __( 'We contact you via discord immediately to get the order process started', 'gladiator' ),
-		),
-		array(
-			'text' => __( 'We assign you to the most suitable PRO Player in a very short timeframe', 'gladiator' ),
-		),
-		array(
-			'text' => __( 'We complete your order safely and ask you to write us a review. We send you a discount code for next time :)', 'gladiator' ),
-		),
-	);
-}
-
-if ( is_array( $product_advantages ) && count( $product_advantages ) ) {
-	$after_order_steps = array();
-
-	foreach ( $product_advantages as $advantage ) {
-		if ( empty( $advantage['text'] ) && empty( $advantage['icon'] ) ) {
-			continue;
-		}
-
-		$after_order_steps[] = array(
-			'icon' => $advantage['icon'] ?? '',
-			'text' => $advantage['text'] ?? '',
-		);
-	}
-}
-
-$render_after_order_flow = static function ( $steps ) {
-	$theme_uri = get_template_directory_uri();
-	?>
-	<div class="advantages_section">
-		<h3 class="advantages_title"><?php esc_html_e( 'What Happens After Order', 'gladiator' ); ?></h3>
-		<div class="advantages-block_item_wrap d-flex">
-			<?php foreach ( $steps as $index => $step ) : ?>
-				<?php
-				$icon     = $step['icon'] ?? '';
-				$icon_alt = wp_strip_all_tags( $step['text'] ?? '' );
-				$icon_url = '';
-
-				if ( is_array( $icon ) ) {
-					$icon_url = $icon['url'] ?? '';
-					$icon_alt = $icon['alt'] ?? $icon_alt;
-				} elseif ( is_numeric( $icon ) ) {
-					$icon_url = wp_get_attachment_image_url( (int) $icon, 'full' );
-				} elseif ( is_string( $icon ) && preg_match( '#^https?://#', $icon ) ) {
-					$icon_url = $icon;
-				} elseif ( is_string( $icon ) && $icon !== '' ) {
-					$icon_url = $theme_uri . '/img/' . ltrim( $icon, '/' );
-				}
-				?>
-				<div class="advantage_item wow animate__animated animate__zoomIn" data-wow-delay="<?php echo esc_attr( number_format( $index * 0.2, 1 ) . 's' ); ?>">
-					<div class="advantage_item__step-number"><?php echo esc_html( $index + 1 ); ?></div>
-					<?php if ( $icon_url ) : ?>
-						<img
-							class="advantage_item__image<?php echo ! empty( $step['image_class'] ) ? ' ' . esc_attr( $step['image_class'] ) : ''; ?>"
-							src="<?php echo esc_url( $icon_url ); ?>"
-							alt="<?php echo esc_attr( $icon_alt ); ?>"
-						>
-					<?php endif; ?>
-					<p><?php echo esc_html( $step['text'] ); ?></p>
-				</div>
-			<?php endforeach; ?>
-		</div>
-	</div>
-	<?php
-};
-
 ?>
 <!-- [ <?php echo str_replace($_SERVER["DOCUMENT_ROOT"], '', __FILE__); ?> -->
 
@@ -390,7 +289,6 @@ $render_after_order_flow = static function ( $steps ) {
                 <li><a href="#" class="js-tab-head"
                        data-target="#rating-body-4"><?php _e( 'FAQ', 'gladiator' ); ?></a></li><?php } ?>
             </ul>
-			<?php $render_after_order_flow( $after_order_steps ); ?>
             <ul class="rating__body">
 							<?php if ( get_field( 'description_text' ) ) { ?>
                 <li class="js-tab-body" id="rating-body-1"
@@ -559,7 +457,35 @@ $render_after_order_flow = static function ( $steps ) {
                 <li><a href="#" class="js-tab-head"
                        data-target="#rating-body-4"><?php _e( 'FAQ', 'gladiator' ); ?></a></li><?php } ?>
             </ul>
-			<?php $render_after_order_flow( $after_order_steps ); ?>
+            <!--new section -->
+            <div class="advantages_section">
+
+              <h3 class="advantages_title">What Happens After Order</h3>
+              <div class="advantages-block_item_wrap d-flex">
+                <div class="advantage_item wow animate__animated animate__zoomIn" data-wow-delay="0s">
+                    <div class="advantage_item__step-number">1</div>
+                    <img class="advantage_item__image" src="/src/assets/img/what-happens-icon-1.svg" alt="icon">
+                    <p>We contact you on discord within 5 minutes of ordering</p>
+                </div>
+                <div class="advantage_item wow animate__animated animate__zoomIn" data-wow-delay="0.2s">
+                    <div class="advantage_item__step-number">2</div>
+                    <img class="advantage_item__image" src="/src/assets/img/what-happens-icon-2.svg" alt="icon">
+                    <p>We confirm all details & start</p>
+                </div>
+                <div class="advantage_item wow animate__animated animate__zoomIn" data-wow-delay="0.4s">
+                    <div class="advantage_item__step-number">3</div>
+                    <img class="advantage_item__image" src="/src/assets/img/what-happens-icon-3.svg" alt="icon">
+                    <p>After completion, we ask you for a review</p>
+                </div>
+                <div class="advantage_item wow animate__animated animate__zoomIn" data-wow-delay="0.6s">
+                    <div class="advantage_item__step-number">4</div>
+                    <img class="advantage_item__image" src="/src/assets/img/what-happens-icon-4.svg" alt="icon">
+                    <p>We send you a discount code for next time!</p>
+                </div>
+
+              </div>
+            </div>
+            <!--new section -->
            
             <ul class="rating__body">
 							<?php if ( get_field( 'description_text' ) ) { ?>
@@ -677,28 +603,48 @@ $render_after_order_flow = static function ( $steps ) {
         <span aria-hidden="true">×</span>
       </button>
       <div class="modal-header">
-	        <h5 class="modal-title" id="found_cheaperTitle">
-						<?php echo esc_html( $guarantees_popup_title ); ?>
-	        </h5>
-	      </div>
-	      <div class="modal-body">
+        <h5 class="modal-title" id="found_cheaperTitle">
+					<?php _e( 'What happens after order?', 'gladiator' ); ?>
+        </h5>
+      </div>
+      <div class="modal-body">
 
-	        <div class="after_order_wrap">
-				<?php foreach ( $guarantees_popup_steps as $index => $guarantees_popup_step ) : ?>
-					<?php if ( empty( $guarantees_popup_step['text'] ) ) : ?>
-						<?php continue; ?>
-					<?php endif; ?>
-					<div class="after_order_item">
-						<div class="after_order_item_number">
-							<?php echo esc_html( $index + 1 ); ?>
-						</div>
-						<div class="after_order_item_text">
-							<?php echo wp_kses_post( nl2br( $guarantees_popup_step['text'] ) ); ?>
-						</div>
-					</div>
-				<?php endforeach; ?>
+        <div class="after_order_wrap">
 
-	        </div>
+          <div class="after_order_item">
+
+            <div class="after_order_item_number">
+              1
+            </div>
+            <div class="after_order_item_text">
+
+              We contact you via discord immediately to get the order process started
+            </div>
+          </div>
+
+          <div class="after_order_item">
+
+            <div class="after_order_item_number">
+              2
+            </div>
+            <div class="after_order_item_text">
+              We assign you to the most suitable PRO Player in a very short timeframe
+            </div>
+          </div>
+
+          <div class="after_order_item">
+
+            <div class="after_order_item_number">
+              3
+            </div>
+            <div class="after_order_item_text">
+              We complete your order safely and ask you to write us a review. We send you a discount code for next time
+              :)
+            </div>
+          </div>
+
+
+        </div>
 
 
       </div>

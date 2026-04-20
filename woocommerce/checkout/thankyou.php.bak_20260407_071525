@@ -16,75 +16,6 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-
-$order_success_title = get_field( 'order_success_title', 'option' );
-$order_success_order_prefix = get_field( 'order_success_order_prefix', 'option' );
-$order_success_intro_text = get_field( 'order_success_intro_text', 'option' );
-$order_success_video_button_text = get_field( 'order_success_video_button_text', 'option' );
-$order_success_video_url = get_field( 'order_success_video_url', 'option' );
-$order_success_flow_title = get_field( 'order_success_flow_title', 'option' );
-$order_success_steps = get_field( 'order_success_steps', 'option' );
-$order_success_troubleshooting_title = get_field( 'order_success_troubleshooting_title', 'option' );
-$order_success_troubleshooting_items = get_field( 'order_success_troubleshooting_items', 'option' );
-
-if ( empty( $order_success_title ) ) {
-	$order_success_title = __( 'Order Successful!', 'gladiator' );
-}
-
-if ( empty( $order_success_order_prefix ) ) {
-	$order_success_order_prefix = __( 'Your order number is', 'gladiator' );
-}
-
-if ( empty( $order_success_intro_text ) ) {
-	$order_success_intro_text = __( 'Please follow the instructions below to contact us on Discord so we can start your order right away.', 'gladiator' );
-}
-
-if ( empty( $order_success_video_button_text ) ) {
-	$order_success_video_button_text = __( 'Watch Video', 'gladiator' );
-}
-
-if ( empty( $order_success_video_url ) ) {
-	$order_success_video_url = 'https://www.youtube.com/embed/nwM_dbpK8w4?autoplay=1';
-}
-
-if ( empty( $order_success_flow_title ) ) {
-	$order_success_flow_title = __( 'How to contact us', 'gladiator' );
-}
-
-if ( empty( $order_success_steps ) ) {
-	$order_success_steps = array(
-		array(
-			'title' => __( 'Join Our Discord Gateway Server', 'gladiator' ),
-			'text'  => __( 'Link: <a href="https://discord.com/invite/ZVa5Np3kR" target="_blank" rel="noopener noreferrer">discord.gg/ZVa5Np3kR</a><br>This server ONLY allows us to appear in your DMs — nothing else.', 'gladiator' ),
-		),
-		array(
-			'title' => __( 'Open Your Discord Search Bar', 'gladiator' ),
-			'text'  => __( 'Go to: Find or Start a Conversation<br>Type: <strong>gladiatorboost2024</strong>', 'gladiator' ),
-		),
-		array(
-			'title' => __( 'Send Us a Direct Message', 'gladiator' ),
-			'text'  => __( 'Click our profile -> Send a DM with your order number<br>This connects you directly to your assigned GladiatorBoost manager.', 'gladiator' ),
-		),
-	);
-}
-
-if ( ! is_array( $order_success_steps ) ) {
-	$order_success_steps = array();
-}
-
-$order_success_steps = array_values( array_slice( $order_success_steps, 0, 3 ) );
-
-if ( empty( $order_success_troubleshooting_title ) ) {
-	$order_success_troubleshooting_title = __( 'Troubleshooting (if needed)', 'gladiator' );
-}
-
-if ( empty( $order_success_troubleshooting_items ) || ! is_array( $order_success_troubleshooting_items ) ) {
-	$order_success_troubleshooting_items = array(
-		__( 'Try searching @gladiatorboost2024', 'gladiator' ),
-		__( 'Enable: Privacy -> "Allow messages from server members"', 'gladiator' ),
-		__( 'After joining the server, you will see us in your DM list', 'gladiator' ),
-	);
-}
 ?>
 
 <div class="woocommerce-order container section__intro__mini order__successfull">
@@ -125,21 +56,47 @@ if ( empty( $order_success_troubleshooting_items ) || ! is_array( $order_success
 
 			</div>
 
-				<h2 class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received order__successfull-title-styles"><?php echo esc_html( $order_success_title ); ?></h2>
+			<h2 class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received order__successfull-title-styles"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', esc_html__( 'Order Successful!', 'woocommerce' ), $order ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
 
-				<ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
+			<ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
 
-					<li class="woocommerce-order-overview__order order order__successfull-title-styles">
-						<?php echo esc_html( $order_success_order_prefix ); ?>
-						<strong><?php echo $order->get_order_number(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
+				<li class="woocommerce-order-overview__order order order__successfull-title-styles">
+					<?php esc_html_e( 'Your order number is ', 'woocommerce' ); ?>
+					<strong><?php echo $order->get_order_number(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
+				</li>
+
+				<!-- <li class="woocommerce-order-overview__date date">
+					<?php esc_html_e( 'Date:', 'woocommerce' ); ?>
+					<strong><?php echo wc_format_datetime( $order->get_date_created() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
+				</li> -->
+
+				<?php if ( is_user_logged_in() && $order->get_user_id() === get_current_user_id() && $order->get_billing_email() ) : ?>
+					<li class="woocommerce-order-overview__email email">
+						<?php esc_html_e( 'Email:', 'woocommerce' ); ?>
+						<strong><?php echo $order->get_billing_email(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
 					</li>
-				</ul>
+				<?php endif; ?>
 
-			   <p class="order__successfull-text"><?php echo wp_kses_post( $order_success_intro_text ); ?></p>
-	           <button class="watch-btn" id="openVideo"  data-video="<?php echo esc_url( $order_success_video_url ); ?>">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<g clip-path="url(#clip0_3108_1477)">
-						<path d="M12 0C5.37267 0 0 5.37258 0 12C0 18.6274 5.37267 24 12 24C18.6273 24 24 18.6274 24 12C24 5.37258 18.6273 0 12 0ZM16.1475 12.6361L10.1475 16.3861C10.0261 16.4619 9.88805 16.5 9.75 16.5C9.62494 16.5 9.49969 16.4689 9.38634 16.4059C9.14794 16.2737 9 16.0228 9 15.75V8.25C9 7.97719 9.14794 7.72631 9.38634 7.59412C9.62475 7.46119 9.91627 7.46925 10.1475 7.61391L16.1475 11.3639C16.3667 11.5012 16.5 11.7415 16.5 12C16.5 12.2585 16.3667 12.4988 16.1475 12.6361Z" fill="#098CEC"/>
+				<!-- <li class="woocommerce-order-overview__total total">
+					<?php esc_html_e( 'Total:', 'woocommerce' ); ?>
+					<strong><?php echo $order->get_formatted_order_total(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
+				</li> -->
+
+				<?php if ( $order->get_payment_method_title() ) : ?>
+					<li class="woocommerce-order-overview__payment-method method">
+						<?php esc_html_e( 'Payment method:', 'woocommerce' ); ?>
+						<strong><?php echo wp_kses_post( $order->get_payment_method_title() ); ?></strong>
+					</li>
+				<?php endif; ?>
+
+			</ul>
+
+           <!--NEW HTML CODE-->
+		   <p class="order__successfull-text">Please follow the instructions below to contact us on Discord so we can start your order right away.</p>
+           <button class="watch-btn" id="openVideo"  data-video="https://www.youtube.com/embed/nwM_dbpK8w4?autoplay=1">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<g clip-path="url(#clip0_3108_1477)">
+					<path d="M12 0C5.37267 0 0 5.37258 0 12C0 18.6274 5.37267 24 12 24C18.6273 24 24 18.6274 24 12C24 5.37258 18.6273 0 12 0ZM16.1475 12.6361L10.1475 16.3861C10.0261 16.4619 9.88805 16.5 9.75 16.5C9.62494 16.5 9.49969 16.4689 9.38634 16.4059C9.14794 16.2737 9 16.0228 9 15.75V8.25C9 7.97719 9.14794 7.72631 9.38634 7.59412C9.62475 7.46119 9.91627 7.46925 10.1475 7.61391L16.1475 11.3639C16.3667 11.5012 16.5 11.7415 16.5 12C16.5 12.2585 16.3667 12.4988 16.1475 12.6361Z" fill="#098CEC"/>
 					</g>
 					<defs>
 					<clipPath id="clip0_3108_1477">
@@ -148,51 +105,52 @@ if ( empty( $order_success_troubleshooting_items ) || ! is_array( $order_success
 					</defs>
 				</svg>
 
-					<span><?php echo esc_html( $order_success_video_button_text ); ?></span>
-				</button>
+				<span>Watch Video</span>
+			</button>
 
-				<h3 class="how-to-contacts__title"><?php echo esc_html( $order_success_flow_title ); ?></h3>
+			<h3 class="how-to-contacts__title">How to contact us</h3>
 
-				<div class="contact__grid">
-					<?php foreach ( $order_success_steps as $index => $order_success_step ) : ?>
-						<?php
-						$step_title = $order_success_step['title'] ?? '';
-						$step_text  = $order_success_step['text'] ?? '';
-
-						if ( empty( $step_title ) && empty( $step_text ) ) {
-							continue;
-						}
-						?>
-						<div class="contact__item">
-							<div class="num"><?php echo esc_html( $index + 1 ); ?></div>
-							<div>
-								<?php if ( $step_title ) : ?>
-									<h3><?php echo esc_html( $step_title ); ?></h3>
-								<?php endif; ?>
-								<?php if ( $step_text ) : ?>
-									<?php if ( strpos( $step_text, '<' ) !== false ) : ?>
-										<p><?php echo wp_kses_post( str_replace( '<br>', '</p><p>', $step_text ) ); ?></p>
-									<?php else : ?>
-										<p><?php echo wp_kses_post( $step_text ); ?></p>
-									<?php endif; ?>
-								<?php endif; ?>
-							</div>
-						</div>
-					<?php endforeach; ?>
+			<div class="contact__grid">
+				
+				<div class="contact__item">
+					<div class="num">1</div>
+					<div>
+						<h3>Join Our Discord Gateway Server</h3>
+						<p>Link: <a href="https://discord.com/invite/ZVa5Np3kR" target="blank">discord.gg/ZVa5Np3kR</a></p>
+						<p>This server ONLY allows us to appear in your DMs — nothing else.</p>
+					</div>
 				</div>
 
-				<ul class="order-successfull__check-block">
-					<li class="order-successfull__check-block-title"><?php echo esc_html( $order_success_troubleshooting_title ); ?></li>
-					<?php foreach ( $order_success_troubleshooting_items as $troubleshooting_item ) : ?>
-						<?php if ( empty( $troubleshooting_item ) ) : ?>
-							<?php continue; ?>
-						<?php endif; ?>
-						<li><?php echo wp_kses_post( $troubleshooting_item ); ?></li>
-					<?php endforeach; ?>
-				</ul>
+				<div class="contact__item">
+					<div class="num">2</div>
+					<div>
+						<h3>Open Your Discord Search Bar</h3>
+						<p>Go to: Find or Start a Conversation</p>
+						<p>Type: <strong>gladiatorboost2024</strong></p>
+					</div>
+				</div>
 
-				<!-- Modal -->
-				<div class="video-modal" id="videoModal">
+				<div class="contact__item">
+					<div class="num">3</div>
+					<div>
+						<h3>Send Us a Direct Message</h3>
+						<p>Click our profile → Send a DM with your order number</p>
+						<p>This connects you directly to your assigned GladiatorBoost manager.</p>
+					</div>
+				</div>
+
+			</div>
+
+			<ul class="order-successfull__check-block">
+				<li>Troubleshooting (if needed)</li>
+				<li>Try searching @gladiatorboost2024</li>
+				<li>Enable: Privacy → “Allow messages from server members”</li>
+				<li>After joining the server, you will see us in your DM list</li>
+				</ul>
+		
+
+			<!-- Modal -->
+			<div class="video-modal" id="videoModal">
 				<div class="video-modal__content">
 				<span class="close" id="closeVideo">&times;</span>
 				<iframe id="videoFrame"
@@ -204,6 +162,13 @@ if ( empty( $order_success_troubleshooting_items ) || ! is_array( $order_success
 				</div>
 			</div>
 
+           <!--END NEW HTML CODE-->
+
+            <div class="thankyou_text">
+                <h2><?php echo get_field('thank_you_page_title','options'); ?></h2>
+                <?php echo get_field('thank_you_page_text','options'); ?>
+            </div>
+												
             <!-- REDIRECT TO CHAT -->
             <?php
                 $current_user = wp_get_current_user();

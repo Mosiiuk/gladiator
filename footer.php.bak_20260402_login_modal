@@ -378,10 +378,34 @@ if ( 1 > 2 ) {
                 <button type="button" class="btn-close close" data-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-form__wrapper">
                   <h3>Sign in</h3>
-                  <?php gladiator_render_social_login_buttons(); ?>
+                  <ul class="login__list">
+                    <li>
+                      <a href="<?php echo home_url(); ?>/wp-login.php?loginSocial=discord" data-plugin="nsl"
+                         data-action="connect" data-redirect="current" data-provider="discord" data-popupwidth="600"
+                         data-popupheight="600">
+                        <img src="<?php echo theme_url; ?>/img/discord.svg" alt="icon">
+                        <h5>Discord</h5>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="<?php echo home_url(); ?>/wp-login.php?loginSocial=google" data-plugin="nsl"
+                         data-action="connect" data-redirect="current" data-provider="google" data-popupwidth="600"
+                         data-popupheight="600">
+                        <img src="<?php echo theme_url; ?>/img/google.svg" alt="icon"><h5>Google</h5>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="<?php echo home_url(); ?>/wp-login.php?loginSocial=steam" data-plugin="nsl"
+                         data-action="connect" data-redirect="current" data-provider="steam" data-popupwidth="600"
+                         data-popupheight="600">
+                        <img src="<?php echo theme_url; ?>/img/steam.svg" alt="icon">
+                        <h5>Steam</h5>
+                      </a>
+                    </li>
+                  </ul>
                   <h4 class="title__sign-email">or sign up with email</h4>
 
-                  <form action="#" method="post" class="registration__form ajax-login-form" id="ajax_login_form">
+                  <form action="<?php echo wp_login_url(); ?>" method="post" class="registration__form">
                     <div class="form-registration__input-wrapper">
                       <div class="form__input input__full-width form-username">
                         <input type="text" name="log" id="user_login" autocapitalize="off" value=""
@@ -395,8 +419,6 @@ if ( 1 > 2 ) {
                         </div>
                       </div>
                     </div>
-
-                    <div class="register_error login_error"></div>
 
                     <div class="form__button">
                       <button type="submit" class="btn-main">Sign in</button>
@@ -424,11 +446,37 @@ if ( 1 > 2 ) {
                 <button type="button" class="btn-close close" data-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-form__wrapper">
                   <h3>Create account</h3>
-                  <?php gladiator_render_social_login_buttons(); ?>
+                  <ul class="login__list">
+                    <li>
+                      <a href="<?php echo home_url(); ?>/wp-login.php?loginSocial=discord" data-plugin="nsl"
+                         data-action="connect" data-redirect="current" data-provider="discord" data-popupwidth="600"
+                         data-popupheight="600">
+                        <img src="<?php echo theme_url; ?>/img/discord.svg" alt="icon">
+                        <h5>Discord</h5>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="<?php echo home_url(); ?>/wp-login.php?loginSocial=google" data-plugin="nsl"
+                         data-action="connect" data-redirect="current" data-provider="google" data-popupwidth="600"
+                         data-popupheight="600">
+                        <img src="<?php echo theme_url; ?>/img/google.svg" alt="icon"><h5>Google</h5>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="<?php echo home_url(); ?>/wp-login.php?loginSocial=steam" data-plugin="nsl"
+                         data-action="connect" data-redirect="current" data-provider="steam" data-popupwidth="600"
+                         data-popupheight="600">
+                        <img src="<?php echo theme_url; ?>/img/steam.svg" alt="icon">
+                        <h5>Steam</h5>
+                      </a>
+                    </li>
+                  </ul>
 
                   <h4 class="title__sign-email">or sign up with email</h4>
 
-                  <form name="registerform" id="registerform" action="#" method="post" class="registration__form">
+                  <form name="loginform" id="loginform" action="#" method="post" class="registration__form">
                     <div class="form-registration__input-wrapper">
                       <div class="form__input input__full-width form-username">
                         <input type="text" name="log" id="user_login_reg" value="" placeholder="Username">

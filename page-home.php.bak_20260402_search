@@ -6,198 +6,6 @@ get_header();
 
 $game_design = Game_Change::get_instance()->get_game_design();
 
-if ( ! function_exists( 'gladiator_home_normalize_game_text' ) ) {
-    function gladiator_home_normalize_game_text( $value ) {
-        $value = is_string( $value ) ? wp_strip_all_tags( $value ) : '';
-        $value = function_exists( 'mb_strtolower' ) ? mb_strtolower( $value ) : strtolower( $value );
-
-        return trim( preg_replace( '/\s+/', ' ', $value ) );
-    }
-}
-
-if ( ! function_exists( 'gladiator_home_game_text_has_keyword' ) ) {
-    function gladiator_home_game_text_has_keyword( $haystack, $keywords ) {
-        foreach ( $keywords as $keyword ) {
-            if ( false !== strpos( $haystack, gladiator_home_normalize_game_text( $keyword ) ) ) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-}
-
-if ( ! function_exists( 'gladiator_home_get_game_sort_group' ) ) {
-    function gladiator_home_get_game_sort_group( $item, $term = null ) {
-        $title    = isset( $item['title'] ) ? $item['title'] : '';
-        $subtitle = isset( $item['subtitle'] ) ? $item['subtitle'] : '';
-        $slug     = '';
-        $name     = '';
-
-        if ( $term instanceof WP_Term ) {
-            $slug = $term->slug;
-            $name = $term->name;
-        } elseif ( is_numeric( $term ) ) {
-            $resolved_term = get_term( (int) $term, 'product_cat' );
-
-            if ( $resolved_term instanceof WP_Term && ! is_wp_error( $resolved_term ) ) {
-                $slug = $resolved_term->slug;
-                $name = $resolved_term->name;
-            }
-        }
-
-        $haystack = gladiator_home_normalize_game_text(
-            implode(
-                ' ',
-                array_filter(
-                    [
-                        $title,
-                        $subtitle,
-                        $slug,
-                        $name,
-                    ]
-                )
-            )
-        );
-
-        $keyword_map = [
-            'mobile'   => [
-                'mobile',
-                'ios',
-                'android',
-            ],
-            'moba'     => [
-                'moba',
-                'dota',
-                'league of legends',
-                'wild rift',
-                'smite',
-                'predecessor',
-                'mobile legends',
-                'honor of kings',
-                'heroes of the storm',
-                'pokemon unite',
-            ],
-            'shooters' => [
-                'shooter',
-                'call of duty',
-                'black ops',
-                'warzone',
-                'counter-strike',
-                'cs2',
-                'valorant',
-                'apex',
-                'fortnite',
-                'pubg',
-                'marathon',
-                'helldivers',
-                'destiny',
-                'rainbow six',
-                'battlefield',
-                'escape from tarkov',
-                'tarkov',
-                'the finals',
-                'overwatch',
-                'xdefiant',
-                'delta force',
-                'arena breakout',
-                'arc raiders',
-            ],
-            'racing'   => [
-                'racing',
-                'forza',
-                'gran turismo',
-                'need for speed',
-                'kart',
-                'motorsport',
-                'trackmania',
-                'asphalt',
-            ],
-            'fighting' => [
-                'fighting',
-                'fighter',
-                'tekken',
-                'street fighter',
-                'mortal kombat',
-                'injustice',
-                'brawlhalla',
-                'super smash',
-                'guilty gear',
-                'dragon ball fighterz',
-                '2xko',
-            ],
-            'sports'   => [
-                'sports',
-                'sport',
-                'fifa',
-                'ea sports fc',
-                'fc ',
-                'madden',
-                'nba 2k',
-                'nhl ',
-                'mlb ',
-                'ufl',
-                'ufc',
-                'wwe',
-            ],
-            'mmorpg'   => [
-                'mmorpg',
-                'mmo',
-                'rpg',
-                'world of warcraft',
-                'wow',
-                'warcraft',
-                'tbc anniversary',
-                'burning crusade',
-                'final fantasy xiv',
-                'ffxiv',
-                'elder scrolls online',
-                'eso',
-                'guild wars',
-                'lost ark',
-                'diablo',
-                'path of exile',
-                'poe',
-                'runescape',
-                'throne and liberty',
-                'tarisland',
-                'new world',
-                'lineage',
-                'maplestory',
-                'black desert',
-                'blade and soul',
-                'albion',
-                'aion',
-                'ragnarok',
-                'neverwinter',
-                'perfect world',
-                'raven2',
-                'raven 2',
-            ],
-        ];
-
-        foreach ( $keyword_map as $group => $keywords ) {
-            if ( gladiator_home_game_text_has_keyword( $haystack, $keywords ) ) {
-                return $group;
-            }
-        }
-
-        return 'default';
-    }
-}
-
-$home_game_filters = [
-    'default'   => __( 'Default', 'gladiator-theme' ),
-    'a-z'       => __( 'A - Z', 'gladiator-theme' ),
-    'mmorpg'    => __( 'MMORPG', 'gladiator-theme' ),
-    'shooters'  => __( 'Shooters', 'gladiator-theme' ),
-    'moba'      => __( 'MOBA', 'gladiator-theme' ),
-    'racing'    => __( 'Racing', 'gladiator-theme' ),
-    'fighting'  => __( 'Fighting', 'gladiator-theme' ),
-    'sports'    => __( 'Sports', 'gladiator-theme' ),
-    'mobile'    => __( 'Mobile', 'gladiator-theme' ),
-];
-
 ?>
 <!--[ <?php  echo str_replace($_SERVER['DOCUMENT_ROOT'],'',__FILE__); ?> -->
 
@@ -213,30 +21,19 @@ $home_game_filters = [
                             <p><?php echo __('GladiatorBoost offers trusted game boosting and coaching to help gamers succeed.','gladiator-theme');?></p>
 
                             <div class="search_home_wrap">
-                              <form autocomplete="off" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="search_form search_form_hero">
-                                <button type="submit">
+                              <form autocomplete="off" role="search" method="get"  action="#" class="search_form search_form_hero">
+                                <button type="button" >
                                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="11" cy="11" r="6" stroke="white"></circle>
                                     <path d="M20 20L17 17" stroke="white" stroke-linecap="round"></path>
                                   </svg>
                                 </button>
 
-                                <input
-                                  type="search"
-                                  value=""
-                                  name="s"
-                                  id="home_search_ext"
-                                  class="search-input home_search_ext"
-                                  placeholder="<?php echo esc_attr__( 'Search 200+ games...', 'gladiator-theme' ); ?>"
-                                  aria-label="<?php echo esc_attr__( 'Search 200+ games', 'gladiator-theme' ); ?>"
-                                  aria-autocomplete="list"
-                                  aria-controls="home_search_ext_result"
-                                  aria-expanded="false"
-                                >
+                                <input type="search" value="" name="home_search_ext" id="home_search_ext" class="search-input home_search_ext"  placeholder="Search">
 
-                                  <div class="home_search_ext_result_wrap" aria-live="polite">
+                                  <div class="home_search_ext_result_wrap">
                                           <!--- POPAP RESULT -->
-                                          <div id="home_search_ext_result" class="home_search_ext_result" role="listbox">
+                                          <div id="home_search_ext_result" >
 
                                           </div>
                                           <!--- /POPAP RESULT -->
@@ -261,8 +58,6 @@ $home_game_filters = [
 
                             if ( is_array($repeater) && count($repeater) )
                             {
-                               $repeater = array_slice($repeater, 0, 10);
-
                                foreach ($repeater as $key => $item)
                                {
                                    $icon = $item['icon'];
@@ -324,20 +119,7 @@ $home_game_filters = [
 
                         <h3>Browse all Games</h3>
 
-                            <div class="hero__games-sort" role="group" aria-label="<?php echo esc_attr__( 'Browse all games filters', 'gladiator-theme' ); ?>">
-                                <?php foreach ( $home_game_filters as $filter_slug => $filter_label ) : ?>
-                                    <button
-                                        type="button"
-                                        class="hero__games-filter<?php echo 'default' === $filter_slug ? ' is-active' : ''; ?>"
-                                        data-games-filter="<?php echo esc_attr( $filter_slug ); ?>"
-                                        aria-pressed="<?php echo 'default' === $filter_slug ? 'true' : 'false'; ?>"
-                                    >
-                                        <?php echo esc_html( $filter_label ); ?>
-                                    </button>
-                                <?php endforeach; ?>
-                            </div>
-
-                            <div class="hero__games hero__games--browse">
+                            <div class="hero__games ">
 
                                 <?php
                                     $tabs = $game_design['tabs'];
@@ -345,42 +127,29 @@ $home_game_filters = [
                                     {
                                         foreach ($tabs as $key => $item)
                                         {
-                                            $term       = get_term( (int) $item['category'], 'product_cat' );
-                                            $link       = get_term_link($item['category']);
-                                            $icon       = $item['icon'];
-                                            $title      = isset( $item['title'] ) ? $item['title'] : '';
-                                            $subtitle   = isset( $item['subtitle'] ) ? $item['subtitle'] : '';
-                                            $sort_group = gladiator_home_get_game_sort_group( $item, $term );
-                                            ?>
-                                                <div
-                                                    class="hero__games-item home_all_list_game"
-                                                    data-default-index="<?php echo esc_attr( $key ); ?>"
-                                                    data-game-title="<?php echo esc_attr( $title ); ?>"
-                                                    data-game-sort-group="<?php echo esc_attr( $sort_group ); ?>"
-                                                >
-                                                    <img src="<?php echo esc_url( $icon['url'] ); ?>" alt="<?php echo esc_attr( $icon['alt'] ); ?>">
-                                                    <div class="hero__games-title">
-                                                        <h4><?php echo esc_html( $title ); ?></h4>
+                                            $link = get_term_link($item['category']);
+                                            $icon = $item['icon'];
+                                            echo "
+                                                <div class=\"hero__games-item home_all_list_game\">
+                                                    <img src=\"$icon[url]\" alt=\"$icon[alt]\">
+                                                    <div class=\"hero__games-title\">
+                                                        <h4>$item[title]</h4>
                                                     </div>
-                                                    <a href="<?php echo esc_url( $link ); ?>" class="hero__games-description">
-                                                        <div class="hero__games-content">
-                                                            <h4><?php echo esc_html( $title ); ?></h4>
-                                                            <p><?php echo esc_html( $subtitle ); ?></p>
+                                                    <a href=\"$link\" class=\"hero__games-description\">
+                                                        <div class=\"hero__games-content\">
+                                                            <h4>$item[title]</h4>
+                                                            <p>$item[subtitle]</p>
                                                         </div>
-                                                        <p>Details<img src="<?php echo esc_url( theme_url . '/img/arrow.svg' ); ?>" alt="arrow"></p>
+                                                        <p>Details<img src=\"".theme_url."/img/arrow.svg\" alt=\"arrow\"></p>
                                                     </a>
                                                 </div>
-                                            <?php
+                                            ";
                                         }
                                     }
 
                                     $buttons = get_field('buttons',get_the_ID());
                                 ?>
                             </div>
-
-                            <p class="hero__games-empty" id="home_all_list_game_empty" hidden>
-                                <?php echo esc_html__( 'No games found for this filter yet.', 'gladiator-theme' ); ?>
-                            </p>
 
                             <a href="#" class="btn-main" id="home_all_list_game_btn" >Show more </a>
 

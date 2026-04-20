@@ -42,7 +42,7 @@ defined( 'ABSPATH' ) || exit;
                                 <a href="#orders">Orders</a>
                             </li>
                             <li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--customer-logout">
-                                <a href="#">Logout</a>
+                                <a href="<?php echo esc_url( wp_logout_url( home_url( '/' ) ) ); ?>">Logout</a>
                             </li>
                         </ul>
                         <?php /*do_action( 'woocommerce_account_navigation' );*/ ?>

@@ -184,8 +184,44 @@ jQuery(document).ready(function ($) {
     radios.eq(nextIndex).prop("checked", true).trigger("change");
   });
 
-  $('#money_prod_buy').click(function(e){
-      e.preventDefault();
+  function setMoneyProductBuyState(state) {
+    const $button = $('#money_prod_buy');
+
+    if (!$button.length) {
+      return;
+    }
+
+    if (!$button.data('default-label')) {
+      $button.data('default-label', $.trim($button.text()));
+    }
+
+    const defaultLabel = $button.data('default-label');
+    let nextLabel = defaultLabel;
+    let isBusy = false;
+
+    if (state === 'processing') {
+      nextLabel = 'Processing...';
+      isBusy = true;
+    } else if (state === 'added') {
+      nextLabel = 'Added to cart';
+      isBusy = false;
+    }
+
+    $button
+      .text(nextLabel)
+      .prop('disabled', isBusy)
+      .toggleClass('is-loading', isBusy)
+      .attr('aria-busy', isBusy ? 'true' : 'false')
+      .css({
+        opacity: isBusy ? '0.7' : '',
+        cursor: isBusy ? 'wait' : '',
+      });
+  }
+
+  $('#money_prod_buy').click(function(){
+      if ($(this).prop('disabled')) {
+        return false;
+      }
 
       let prod_id = $(this).data('prod_id');
       let money_qtn = parseInt($('#gold_custom_amount_value').val());
@@ -218,12 +254,24 @@ jQuery(document).ready(function ($) {
         type: "POST",
         url: ajaxurl.url,
         data: data,
+        beforeSend: function() {
+          setMoneyProductBuyState('processing');
+        },
         success: function (data) {
-          refreshMiniCart(true);
+          refreshMiniCart(true, function() {
+            setMoneyProductBuyState('added');
+
+            setTimeout(function() {
+              setMoneyProductBuyState('default');
+            }, 1200);
+          });
+        },
+        error: function() {
+          setMoneyProductBuyState('default');
+          alert('Something went wrong. Please try again.');
         },
       });
 
-      return false;
   });
   //---------------------/money product----------------------------------
 
@@ -247,7 +295,7 @@ jQuery(document).ready(function ($) {
     $cartButton.addClass('active');
   }
 
-  function refreshMiniCart(openAfterRefresh) {
+  function refreshMiniCart(openAfterRefresh, onComplete) {
     $.get(window.location.href, function(response) {
       const $response = $('<div>').append($.parseHTML(response));
       const minicartHtml = $response.find('#form_minicart').html();
@@ -264,9 +312,17 @@ jQuery(document).ready(function ($) {
       if (openAfterRefresh) {
         openMiniCart();
       }
+
+      if (typeof onComplete === 'function') {
+        onComplete();
+      }
     }).fail(function() {
       if (openAfterRefresh) {
         openMiniCart();
+      }
+
+      if (typeof onComplete === 'function') {
+        onComplete();
       }
     });
   }
@@ -280,27 +336,52 @@ jQuery(document).ready(function ($) {
     }
   });
 
-  $("#home_search_ext").on("keyup", function() {
-      let value = $(this).val();
-      console.log(value);
+  const buildSearchResultsUrl = (query) => {
+    return `${ajaxurl.site_url.replace(/\/$/, "")}/?s=${encodeURIComponent(query)}`;
+  };
 
-      let data=
-      {
-        action:'home_search_ext',
-        game_name:value,
-      };
+  const redirectToSearchResults = (query) => {
+    const normalizedQuery = $.trim(query);
 
-      jQuery.ajax({
-        type: "POST",
-        url: ajaxurl.url,
-        data: data,
-        success: function (data) {
-          let obj = jQuery.parseJSON(data);
+    if (!normalizedQuery.length) {
+      return;
+    }
 
-          $('#home_search_ext_result').show();
-          $('#home_search_ext_result').html(obj.html);
-        },
-      });
+    window.location.href = buildSearchResultsUrl(normalizedQuery);
+  };
+
+  let homeSearchTimer = null;
+
+  $("#home_search_ext").on("keyup", function(event) {
+      const value = $.trim($(this).val());
+
+      if (event.key === "Enter") {
+        return;
+      }
+
+      clearTimeout(homeSearchTimer);
+
+      if (value.length < 2) {
+        $('#home_search_ext_result').hide().empty();
+        return;
+      }
+
+      homeSearchTimer = setTimeout(function () {
+        jQuery.ajax({
+          type: "POST",
+          url: ajaxurl.url,
+          data: {
+            action:'home_search_ext',
+            game_name:value,
+          },
+          success: function (data) {
+            let obj = jQuery.parseJSON(data);
+
+            $('#home_search_ext_result').show();
+            $('#home_search_ext_result').html(obj.html);
+          },
+        });
+      }, 200);
 
   });
 
@@ -821,25 +902,23 @@ if(tr == true){
     $(".mega_menu_wrap").toggleClass("d-none");
   });
 
-  $(".search-input:not(.home_search_ext)").on("click", () => {
+  $("#s").on("click", () => {
     if (typeof yourFunctionName === 'closeBurgerMenu') {
       closeBurgerMenu();
     }
   });
 
-  $(document).on("input", '.search-input', function (event) {
-    if ($(event.target).closest(".search-input, .result-search").length > 0) {
+  $(document).on("input", '#s', function (event) {
+    if ($(event.target).closest("#s, .result-search").length > 0) {
       $(".result-search").css("transform", "none");
     } else {
       $(".result-search").css("transform", "translateY(-200%)");
     }
   });
   $(document).on("click", function (event) {
-
-    if (event.target != document.querySelector('.search-input') ||
-    !event.target.closest('.result-search')) {
+    if (!event.target.closest('#searchform') && !event.target.closest('.result-search')) {
       $(".result-search").css("transform", "translateY(-200%)");
-    } 
+    }
   });
 
   $(".hero_slider_wrap").slick({
@@ -954,12 +1033,36 @@ steps_value['max'] = +second_value.getAttribute("data-max");
   });
 
   //----- SEARCH TOP INPUT ----
+  $("#searchform, .search_form_hero").on("submit", function (event) {
+    const query = $.trim($(this).find('input[type="search"]').first().val());
+
+    if (!query.length) {
+      event.preventDefault();
+      return;
+    }
+
+    event.preventDefault();
+    redirectToSearchResults(query);
+  });
+
   let s_game = "";
-  $(".search-input:not(.home_search_ext)").keyup(function () {
+  let siteSearchTimer = null;
+  $("#s").keyup(function (event) {
+    if (event.key === "Enter") {
+      return;
+    }
+
     if ($.trim($(this).val()) != s_game) {
       s_game = $.trim($(this).val());
+      clearTimeout(siteSearchTimer);
 
-      if (s_game.length > 2) {
+      if (s_game.length < 2) {
+        $(".result-search .preloader").hide();
+        $(".result-search .result-search-list").hide().empty();
+        return;
+      }
+
+      siteSearchTimer = setTimeout(function () {
         $.ajax({
           url: ajaxurl.url,
           type: "POST",
@@ -979,7 +1082,7 @@ steps_value['max'] = +second_value.getAttribute("data-max");
             $(".result-search .result-search-list").fadeIn().html(result);
           },
         });
-      }
+      }, 200);
     }
   });
   //----- /SEARCH TOP INPUT ----
@@ -1308,21 +1411,27 @@ const modal = document.getElementById('videoModal');
 const closeBtn = document.getElementById('closeVideo');
 const iframe = document.getElementById('videoFrame');
 
-const videoUrl = "https://www.youtube.com/embed/nwM_dbpK8w4?autoplay=1";
+if (openBtn && modal && closeBtn && iframe) {
 
-openBtn.addEventListener('click', () => {
-  modal.style.display = 'block';
-  iframe.src = videoUrl;
-});
+  openBtn.addEventListener('click', () => {
+    const videoUrl = openBtn.getAttribute('data-video');
 
-closeBtn.addEventListener('click', () => {
-  modal.style.display = 'none';
-  iframe.src = '';
-});
+    if (videoUrl) {
+      modal.style.display = 'block';
+      iframe.src = videoUrl;
+    }
+  });
 
-window.addEventListener('click', (e) => {
-  if (e.target === modal) {
+  closeBtn.addEventListener('click', () => {
     modal.style.display = 'none';
     iframe.src = '';
-  }
-});
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+      iframe.src = '';
+    }
+  });
+
+}

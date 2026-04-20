@@ -1210,13 +1210,17 @@ jQuery('.woocommerce-MyAccount-navigation-link a').on('click', function(e) {
 
 
 
+    let el = jQuery(this).attr('href')
+
+    if (!el || el.charAt(0) !== '#') {
+        return;
+    }
+
     e.preventDefault()
 
     jQuery('.woocommerce-MyAccount-navigation-link').removeClass('is-active')
 
     jQuery(this).parents('.woocommerce-MyAccount-navigation-link').addClass('is-active')
-
-    let el = jQuery(this).attr('href')
 
     jQuery('.profile_tab').addClass('hidden')
 

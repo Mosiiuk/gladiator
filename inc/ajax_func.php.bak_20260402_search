@@ -4,121 +4,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // AJAX SEARCH GAMES
-function gladiator_search_products( $search_value, $limit = 10 ) {
-	global $wpdb;
-
-	$search_value = sanitize_text_field( wp_unslash( (string) $search_value ) );
-	$search_value = trim( $search_value );
-	$limit        = absint( $limit );
-
-	if ( $search_value === '' ) {
-		return array();
-	}
-
-	if ( $limit < 1 ) {
-		$limit = 10;
-	}
-
-	$like        = '%' . $wpdb->esc_like( $search_value ) . '%';
-	$prefix_like = $wpdb->esc_like( $search_value ) . '%';
-
-	$sql = $wpdb->prepare(
-		"SELECT DISTINCT p.ID, p.post_title,
-			CASE
-				WHEN LOWER(p.post_title) = LOWER(%s) THEN 120
-				WHEN LOWER(p.post_title) LIKE LOWER(%s) THEN 100
-				WHEN LOWER(p.post_title) LIKE LOWER(%s) THEN 80
-				WHEN LOWER(pm.meta_value) = LOWER(%s) THEN 70
-				WHEN LOWER(pm.meta_value) LIKE LOWER(%s) THEN 60
-				WHEN LOWER(pm.meta_value) LIKE LOWER(%s) THEN 50
-				WHEN LOWER(p.post_excerpt) LIKE LOWER(%s) THEN 35
-				WHEN LOWER(p.post_content) LIKE LOWER(%s) THEN 20
-				ELSE 0
-			END AS relevance
-		FROM {$wpdb->posts} p
-		LEFT JOIN {$wpdb->postmeta} pm
-			ON p.ID = pm.post_id
-			AND pm.meta_key = 'abreviations'
-		WHERE p.post_type = 'product'
-			AND p.post_status = 'publish'
-			AND (
-				LOWER(p.post_title) LIKE LOWER(%s)
-				OR LOWER(p.post_excerpt) LIKE LOWER(%s)
-				OR LOWER(p.post_content) LIKE LOWER(%s)
-				OR LOWER(pm.meta_value) LIKE LOWER(%s)
-			)
-		ORDER BY relevance DESC, p.post_title ASC
-		LIMIT %d",
-		$search_value,
-		$prefix_like,
-		$like,
-		$search_value,
-		$prefix_like,
-		$like,
-		$like,
-		$like,
-		$like,
-		$like,
-		$like,
-		$like,
-		$limit
-	);
-
-	return $wpdb->get_results( $sql );
-}
-
-function gladiator_count_search_products( $search_value ) {
-	global $wpdb;
-
-	$search_value = sanitize_text_field( wp_unslash( (string) $search_value ) );
-	$search_value = trim( $search_value );
-
-	if ( $search_value === '' ) {
-		return 0;
-	}
-
-	$like = '%' . $wpdb->esc_like( $search_value ) . '%';
-
-	$sql = $wpdb->prepare(
-		"SELECT COUNT(DISTINCT p.ID)
-		FROM {$wpdb->posts} p
-		LEFT JOIN {$wpdb->postmeta} pm
-			ON p.ID = pm.post_id
-			AND pm.meta_key = 'abreviations'
-		WHERE p.post_type = 'product'
-			AND p.post_status = 'publish'
-			AND (
-				LOWER(p.post_title) LIKE LOWER(%s)
-				OR LOWER(p.post_excerpt) LIKE LOWER(%s)
-				OR LOWER(p.post_content) LIKE LOWER(%s)
-				OR LOWER(pm.meta_value) LIKE LOWER(%s)
-			)",
-		$like,
-		$like,
-		$like,
-		$like
-	);
-
-	return (int) $wpdb->get_var( $sql );
-}
-
 function search_games() {
 
-	$search_value = isset( $_POST['search'] ) ? sanitize_text_field( wp_unslash( $_POST['search'] ) ) : '';
-	$search_value = trim( $search_value );
-	$totalCount   = gladiator_count_search_products( $search_value );
-	$results      = gladiator_search_products( $search_value, 4 );
+	$search_value = $_POST['search'];
 
-	if ( ! empty( $results ) ) {
+	$query_args = array(
+		'post_type'      => 'product',
+		'posts_per_page' => 4,
+		'post_status'    => array( 'publish' ),
+		'fields'         => array( 'ids', 'post_title' ),
+		'cache_results'  => false,
+		's'              => $search_value,
+	);
+
+	$query      = new WP_Query( $query_args );
+	$totalCount = $query->found_posts;
+
+	if ( $query->have_posts() ) {
 
 		echo '<ul>';
 
-		foreach ( $results as $game ) {
+		foreach ( $query->posts as $game ) {
 
 			$descr   = get_field( 'description_text', $game->ID );
-			if ( empty( $descr ) ) {
-				$descr = get_the_excerpt( $game->ID );
-			}
 			$content = get_field( 'field_645a4a9ec6fef', 'header' );
 
 			?>
@@ -141,13 +49,13 @@ function search_games() {
 
 			echo '<div class="result_bottom_wrap">
                     <div class="btn results_btn">
-	                        <a href="' . esc_url( home_url( '/?s=' . rawurlencode( $search_value ) ) ) . '">' . $content['search_view_all'] . '</a>
-	                    </div>
-	                    <div class="result_search_text">
-	                    <p>Looking for something in a different game?  <a href="' . esc_url( home_url( '/?s=' . rawurlencode( $search_value ) ) ) . '">Search all games instead</a></p>
-	                    </div>
-	                    </div>
-	                    ';
+                        <a href="' . get_permalink( get_page_by_path( 'search' ) ) . '?search=' . $search_value . '">' . $content['search_view_all'] . '</a>
+                    </div>
+                    <div class="result_search_text">
+                    <p>Looking for something in a different game?  <a href="#">Search all games instead</a></p>
+                    </div>
+                    </div>
+                    ';
 		}
 
 	} else {
@@ -348,8 +256,25 @@ add_action( 'wp_ajax_nopriv_home_search_ext', 'home_search_ext' );
 
 function home_search_ext()
 {
-    $game_name = isset( $_POST['game_name'] ) ? sanitize_text_field( wp_unslash( $_POST['game_name'] ) ) : '';
-    $results   = gladiator_search_products( $game_name, 25 );
+    global $wpdb;
+
+    $game_name = sanitize_text_field($_POST['game_name']);
+
+    $sql = "SELECT p.ID, p.post_title 
+        FROM wp_posts p
+        LEFT JOIN wp_postmeta pm ON p.ID = pm.post_id AND pm.meta_key = 'abreviations'
+        WHERE p.post_type = 'product' 
+        AND p.post_status = 'publish' 
+        AND (
+            p.post_title LIKE '%$game_name%' 
+            OR p.post_excerpt LIKE '%$game_name%' 
+            OR p.post_content LIKE '%$game_name%' 
+            OR pm.meta_value LIKE '%$game_name%'
+        )
+        ORDER BY p.post_title DESC, p.post_date DESC 
+        LIMIT 25;";
+
+    $results = $wpdb->get_results($sql);
 
     $prod_html='<ul>';
     if (is_array($results) && count( $results))
@@ -359,12 +284,8 @@ function home_search_ext()
             $ln=get_permalink($item->ID);
             $prod_html.="<li><a href='$ln' >$item->post_title</a></li>";
         }
-        $prod_html.='</ul>';
     }
-    else
-    {
-        $prod_html = '<div class="result_item"><span class="not_found">' . __( 'No Games Found.' ) . '</span></div>';
-    }
+    $prod_html.='</ul>';
 
     echo json_encode( [
         'POST' => $_POST,

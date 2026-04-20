@@ -23,6 +23,21 @@ if ( ! defined( 'ABSPATH' ) ){
     exit;
 }
 
+if ( ! function_exists( 'gladiator_get_logout_redirect_url' ) ) {
+    function gladiator_get_logout_redirect_url() {
+        return home_url( '/' );
+    }
+}
+
+if ( ! function_exists( 'gladiator_logout_redirect_to_home' ) ) {
+    function gladiator_logout_redirect_to_home( $redirect_to = '', $requested_redirect_to = '', $user = null ) {
+        return gladiator_get_logout_redirect_url();
+    }
+}
+
+add_filter( 'logout_redirect', 'gladiator_logout_redirect_to_home', 10, 3 );
+add_filter( 'woocommerce_logout_default_redirect_url', 'gladiator_get_logout_redirect_url', 10, 0 );
+
 // register style and scripts
 require get_template_directory() . '/inc/scripts_and_styles.php';
 
@@ -136,3 +151,85 @@ function clear_gbcount_summ_sess()
 }
 
 //----------- /GBCOIN PAY -----------
+
+if ( ! function_exists( 'gladiator_get_enabled_social_login_providers' ) ) {
+    function gladiator_get_enabled_social_login_providers() {
+        if ( ! class_exists( 'NextendSocialLogin', false ) || empty( NextendSocialLogin::$enabledProviders ) || ! is_array( NextendSocialLogin::$enabledProviders ) ) {
+            return array();
+        }
+
+        $provider_ids = array();
+
+        foreach ( NextendSocialLogin::$enabledProviders as $provider_key => $provider ) {
+            $provider_id = '';
+
+            if ( is_string( $provider_key ) ) {
+                $provider_id = sanitize_key( $provider_key );
+            } elseif ( is_object( $provider ) ) {
+                if ( method_exists( $provider, 'getId' ) ) {
+                    $provider_id = sanitize_key( (string) $provider->getId() );
+                } elseif ( isset( $provider->id ) ) {
+                    $provider_id = sanitize_key( (string) $provider->id );
+                } elseif ( isset( $provider->providerID ) ) {
+                    $provider_id = sanitize_key( (string) $provider->providerID );
+                }
+            }
+
+            if ( $provider_id !== '' ) {
+                $provider_ids[] = $provider_id;
+            }
+        }
+
+        return array_values( array_unique( $provider_ids ) );
+    }
+}
+
+if ( ! function_exists( 'gladiator_render_social_login_buttons' ) ) {
+    function gladiator_render_social_login_buttons() {
+        $providers = gladiator_get_enabled_social_login_providers();
+
+        if ( empty( $providers ) ) {
+            return;
+        }
+
+        $provider_meta = array(
+            'discord'  => array(
+                'label' => 'Discord',
+                'icon'  => theme_url . '/img/discord.svg',
+            ),
+            'facebook' => array(
+                'label' => 'Facebook',
+                'icon'  => theme_url . '/img/facebook-login.svg',
+            ),
+            'google'   => array(
+                'label' => 'Google',
+                'icon'  => theme_url . '/img/google.svg',
+            ),
+            'steam'    => array(
+                'label' => 'Steam',
+                'icon'  => theme_url . '/img/steam.svg',
+            ),
+        );
+
+        echo '<ul class="login__list">';
+
+        foreach ( $providers as $provider_id ) {
+            $provider_label = isset( $provider_meta[ $provider_id ]['label'] ) ? $provider_meta[ $provider_id ]['label'] : ucfirst( $provider_id );
+            $provider_icon  = isset( $provider_meta[ $provider_id ]['icon'] ) ? $provider_meta[ $provider_id ]['icon'] : '';
+            $provider_url   = home_url( '/wp-login.php?loginSocial=' . rawurlencode( $provider_id ) );
+
+            echo '<li>';
+            echo '<a href="' . esc_url( $provider_url ) . '" data-plugin="nsl" data-action="connect" data-redirect="current" data-provider="' . esc_attr( $provider_id ) . '" data-popupwidth="600" data-popupheight="600">';
+
+            if ( $provider_icon !== '' ) {
+                echo '<img src="' . esc_url( $provider_icon ) . '" alt="' . esc_attr( $provider_label ) . ' icon">';
+            }
+
+            echo '<h5>' . esc_html( $provider_label ) . '</h5>';
+            echo '</a>';
+            echo '</li>';
+        }
+
+        echo '</ul>';
+    }
+}
