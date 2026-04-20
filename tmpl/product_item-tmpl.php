@@ -38,6 +38,10 @@ $sub_cats = get_the_terms( $product->get_id(), 'product_cat' );
 
     </div>
 
+    <div class="offer__currency currency__select">
+        <?php header_currency( 'product-card-currency-select product_select' ); ?>
+    </div>
+
     <p>
 
         <?php

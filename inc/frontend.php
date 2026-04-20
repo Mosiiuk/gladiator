@@ -224,7 +224,7 @@ function the_image_url($image, $object = false){
 
 // Header currency
 
-function header_currency(){
+function header_currency( $select_class = 'js-currency_select' ){
     global $WOOCS;
 
     if(is_object($WOOCS) and isset($WOOCS->current_currency))
@@ -233,8 +233,9 @@ function header_currency(){
         $currencies=$WOOCS->get_currencies();
         if(!count( $currencies)) return;
         $content = "";
+        $select_class = trim( $select_class );
 
-        $content='<!-- <div class="mobile_currency"></div>--><select class="js-currency_select" >';
+        $content='<!-- <div class="mobile_currency"></div>--><select class="' . esc_attr( $select_class ) . '" >';
         foreach ($currencies as  $key=> $currencie) {
             $content.="<option data-symbol='$currencie[symbol]' value='$key' " . (($key == $current_currency) ? 'selected' : '') .
                 ">{$currencie['name']}</option>";

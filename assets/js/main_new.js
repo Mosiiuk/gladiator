@@ -784,6 +784,10 @@ jQuery(document).ready(function() {
 
     jQuery('select:not(.product_select)').niceSelect();
 
+    if (jQuery.fn.niceSelect) {
+        jQuery('.product-card-currency-select').niceSelect('destroy');
+    }
+
 
 
     jQuery(window).on('scroll', function() {
@@ -1124,11 +1128,11 @@ jQuery(document.body).on('updated_checkout', function() {
 
 
 
-jQuery('.js-currency_select').on('change', function() {
+function gladiatorChangeCurrency(select) {
 
 
 
-    const currency = jQuery(this).val()
+    const currency = jQuery(select).val()
 
 
 
@@ -1172,6 +1176,18 @@ jQuery('.js-currency_select').on('change', function() {
 
     }
 
+}
+
+jQuery('.js-currency_select').on('change', function() {
+    gladiatorChangeCurrency(this);
+});
+
+jQuery(document).on('change', '.product-card-currency-select', function() {
+    gladiatorChangeCurrency(this);
+});
+
+jQuery(document).on('click mousedown touchstart', '.offer__currency, .offer__currency select', function(e) {
+    e.stopPropagation();
 });
 
 
